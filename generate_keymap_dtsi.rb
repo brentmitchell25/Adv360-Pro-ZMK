@@ -285,33 +285,52 @@ DTSI
 # unicode_macros.dtsi which has the preset aliases at root level.
 
 # ============================================================================
-# Section 8: Mouse key configuration (at root level)
+# Section 8: Mouse constant definitions + mouse key configuration
+#
+# In the Glove80 output, the mouse constants (NATURAL_SCROLLING, MOUSE_*
+# defines) are inside a HACK block before the ENABLE_MOUSE_KEYS section.
+# We need to extract both: the constants (pure #defines) and the DTS config.
 # ============================================================================
-mouse_start = find_line(lines, "MOUSE-KEY <section begins>")
-if mouse_start
-  # Go back to find the #ifdef ENABLE_MOUSE_KEYS
-  search_back = mouse_start
+
+# First, extract mouse constant definitions from the HACK block
+# They're between /*HACK*//{  and /*HACK*/}; just before ENABLE_MOUSE_KEYS
+mouse_hack_start = find_line(lines, "MOUSE-KEY <section begins>")
+if mouse_hack_start
+  # Find the /*HACK*/}; that immediately precedes #ifdef ENABLE_MOUSE_KEYS
+  hack_close = mouse_hack_start
+  while hack_close > 0 && !lines[hack_close].include?("/*HACK*/};")
+    hack_close -= 1
+  end
+
+  # Find the /*HACK*//{  that opens this block of mouse constants
+  hack_open = hack_close
+  while hack_open > 0 && !lines[hack_open].include?("/*HACK*//{")
+    hack_open -= 1
+  end
+
+  # Extract mouse constants (between HACK markers, stripping the markers)
+  if hack_open > 0 && hack_close > hack_open
+    out << "\n//\n// Mouse key constants and configuration\n//\n"
+    lines[(hack_open + 1)..(hack_close - 1)].each do |l|
+      out << l
+    end
+  end
+
+  # Now extract the actual mouse DTS config section
+  search_back = mouse_hack_start
   while search_back > 0 && !lines[search_back].include?("ENABLE_MOUSE_KEYS")
     search_back -= 1
   end
 
-  mouse_end = find_line(lines, "MOUSE-KEY <section ends>", mouse_start)
-  # Continue to find the #else/#endif block
+  mouse_end = find_line(lines, "MOUSE-KEY <section ends>", mouse_hack_start)
   after_mouse = find_line(lines, "#endif", mouse_end)
 
-  out << "\n//\n// Mouse key configuration\n//\n"
-
-  # The mouse section uses emit_at_root_level hack; reconstruct cleanly
-  # Find the actual content between the HACK markers
+  # Output the DTS config (label refs like &mmv, &msc at root level)
   out << lines[search_back..after_mouse].map { |l|
     l.gsub("/*HACK*/};", "").gsub("/*HACK*//", "").gsub("/*HACK*//{", "")
   }.join
   out << "\n"
 end
-
-# ============================================================================
-# Section 10: Natural scrolling defines (before mouse config in original)
-# ============================================================================
 
 # Write the output
 File.write(OUTPUT_FILE, out.join)
