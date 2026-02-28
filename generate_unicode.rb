@@ -452,12 +452,14 @@ def main
   output_lines << '// To regenerate: ruby generate_unicode.rb'
   output_lines << ''
 
-  # Wrap in macros {} block
+  # Wrap in / { macros {} }; block (DTS requires macros inside a root node)
+  output_lines << '/ {'
   output_lines << 'macros {'
   output_lines << gen.result
   output_lines << '};'
+  output_lines << '};'
 
-  # Preset aliases (emitted outside the macros block, using the HACK pattern)
+  # Preset aliases (at root level — label: &ref syntax is valid at file root)
   output_lines << ''
   output_lines << "#if EMOJI_GENDER_SIGN_PRESET == 'N'"
   output_lines << '  emoji_gender_sign_preset: &none {};'

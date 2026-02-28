@@ -3,6 +3,7 @@
 //
 // To regenerate: ruby generate_unicode.rb
 
+/ {
 macros {
   //
   // NOTE: edit the world.yaml file and run `ruby generate_unicode.rb` to regenerate this.
@@ -5829,6 +5830,7 @@ macros {
     bindings = <&emoji_person_shrugging>, <&emoji_theme_sigh_fail>;
     mods = <MOD_LSFT>;
   };
+};
 };
 
 #if EMOJI_GENDER_SIGN_PRESET == 'N'

@@ -171,6 +171,7 @@
   #define KEY_RH_C6R6 0
 #endif
 
+/ {
 conditional_layers {
   compatible = "zmk,conditional-layers";
   #ifdef LAYER_macOS
@@ -3134,54 +3135,18 @@ macros {
   //
 
 };
+}; // close / { root DTS node
 
 //////////////////////////////////////////////////////////////////////////
 //
 // World layer + Emoji layer Unicode macros
 // Generated from world.yaml and emoji.yaml by generate_unicode.rb
-// (Has its own macros {} block; included at root level)
+// (Has its own / { macros {} }; block and emoji presets at root level)
 //
 //////////////////////////////////////////////////////////////////////////
 
 #include "unicode_macros.dtsi"
 
-
-// Emoji presets (aliases at root level)
-/ {
-#if EMOJI_GENDER_SIGN_PRESET == 'N'
-  emoji_gender_sign_preset: &none {};
-#elif EMOJI_GENDER_SIGN_PRESET == 'M'
-  emoji_gender_sign_preset: &emoji_male_sign {};
-#elif EMOJI_GENDER_SIGN_PRESET == 'F'
-  emoji_gender_sign_preset: &emoji_female_sign {};
-#endif
-
-#if EMOJI_SKIN_TONE_PRESET == 'N'
-  emoji_skin_tone_preset: &none {};
-#elif EMOJI_SKIN_TONE_PRESET == 'L'
-  emoji_skin_tone_preset: &emoji_light_skin_tone {};
-#elif EMOJI_SKIN_TONE_PRESET == 'l'
-  emoji_skin_tone_preset: &emoji_medium_light_skin_tone {};
-#elif EMOJI_SKIN_TONE_PRESET == 'M'
-  emoji_skin_tone_preset: &emoji_medium_skin_tone {};
-#elif EMOJI_SKIN_TONE_PRESET == 'd'
-  emoji_skin_tone_preset: &emoji_medium_dark_skin_tone {};
-#elif EMOJI_SKIN_TONE_PRESET == 'D'
-  emoji_skin_tone_preset: &emoji_dark_skin_tone {};
-#endif
-
-#if EMOJI_HAIR_STYLE_PRESET == 'N'
-  emoji_hair_style_preset: &none {};
-#elif EMOJI_HAIR_STYLE_PRESET == 'B'
-  emoji_hair_style_preset: &emoji_bald {};
-#elif EMOJI_HAIR_STYLE_PRESET == 'R'
-  emoji_hair_style_preset: &emoji_red_hair {};
-#elif EMOJI_HAIR_STYLE_PRESET == 'C'
-  emoji_hair_style_preset: &emoji_curly_hair {};
-#elif EMOJI_HAIR_STYLE_PRESET == 'W'
-  emoji_hair_style_preset: &emoji_white_hair {};
-#endif
-};
 
 //
 // Mouse key configuration

@@ -128,6 +128,10 @@ lines[qwerty_start..qwerty_end].each do |line|
 end
 out << "\n"
 
+# Open a root DTS node to contain all behavior/combo/macro blocks.
+# DTS requires these nodes to be inside / { ... }; blocks.
+out << "/ {\n"
+
 # ============================================================================
 # Section 3: Conditional layers
 # Extract from generated output - position-independent
@@ -263,12 +267,13 @@ out << "\n"
 # ============================================================================
 out << <<~'DTSI'
 };
+}; // close / { root DTS node
 
 //////////////////////////////////////////////////////////////////////////
 //
 // World layer + Emoji layer Unicode macros
 // Generated from world.yaml and emoji.yaml by generate_unicode.rb
-// (Has its own macros {} block; included at root level)
+// (Has its own / { macros {} }; block and emoji presets at root level)
 //
 //////////////////////////////////////////////////////////////////////////
 
@@ -276,25 +281,11 @@ out << <<~'DTSI'
 
 DTSI
 
-# ============================================================================
-# Section 8: Emoji presets (at root level via the HACK pattern)
-# ============================================================================
-preset_start = find_line(lines, "/*HACK*/};")
-if preset_start
-  # Find all the preset blocks
-  preset_end = find_line(lines, "/*HACK*//", preset_start + 1)
-  if preset_end
-    # Extract the preset definitions, clean up the HACK wrappers
-    preset_lines = lines[(preset_start + 1)...(preset_end)]
-    out << "\n// Emoji presets (aliases at root level)\n"
-    out << "/ {\n"
-    preset_lines.each { |l| out << l }
-    out << "};\n"
-  end
-end
+# NOTE: Section 8 (emoji presets) removed — they are already included via
+# unicode_macros.dtsi which has the preset aliases at root level.
 
 # ============================================================================
-# Section 9: Mouse key configuration (at root level)
+# Section 8: Mouse key configuration (at root level)
 # ============================================================================
 mouse_start = find_line(lines, "MOUSE-KEY <section begins>")
 if mouse_start
