@@ -1,0 +1,154 @@
+#
+# characters:
+#   <group>:
+#     <name>: { <without_shift>, <with_shift> }
+#
+characters:
+  moon:
+    complete:  { new:     "🌑", full:    "🌕" }
+    gibbous:   { waning:  "🌖", waxing:  "🌔" }
+    quarter:   { waning:  "🌗", waxing:  "🌓" }
+    crescent:  { waning:  "🌘", waxing:  "🌒" }
+  face:
+    smile:     { up:      "🙂", down:    "🙃" }
+    laugh:     { joy:     "😂", rofl:    "🤣" }
+    eyes:      { star:    "🤩", heart:   "😍" }
+    joke:      { wink:    "😉", tongue:  "😜" }
+    fear:      { scared:  "😨", scream:  "😱" }
+    surprise:  { shocked: "🤯", dizzy:   "😵" }
+  gesture:
+    attention: { snap:    "🫰", wave:    "👋" }
+    approval:  { perfect: "👌", cool:    "😎" }
+    gratitude: { pray:    "🙏", salute:  "🫡" }
+    anxiety:   { smile:   "😅", rushed:  "😰" }
+    despair:   { sad:     "😞", cry:     "😢" }
+    curious:   { think:   "🤔", analyze: "🧐" }
+    point:     { up:      "☝️", you:     "🫵" }
+    thumbs:    { up:      "👍", down:    "👎" }
+    hands:     { up:      "🙌", clap:    "👏" }
+  theme:
+    awesome:   { sparkle: "✨", shine:   "🌟" }
+    magic:     { wand:    "🪄", wizard:  "🧙" }
+    space:     { rocket:  "🚀", suit:    "🧑‍🚀" }
+    science:   { nerd:    "🤓", uniform: "🥼" }
+    strength:  { muscle:  "💪", lifting: "🏋️" }
+    effort:    { climb:   "🧗", juggle:  "🤹" }
+    nature:    { fire:    "🔥", water:   "🌊" }
+    love:      { heart:   "❤️", face:    "🥰" }
+    party:     { tada:    "🎉", face:    "🥳" }
+    game:      { dart:    "🎯", dice:    "🎲" }
+    trend:     { up:      "📈", down:    "📉" }
+    sigh:      { shrug:   "🤷", fail:    "🤦" }
+
+#
+# codepoints:
+#   <name>: "<string_of_unicode_characters>"
+#
+codepoints:
+
+  # modifiers
+  zwj: "\u200d"
+  male_sign:   "♂️"
+  female_sign: "♀️"
+  right_arrow: "➡️"
+  left_arrow:  "⬅️"
+
+  # weather
+  rainbow: "🌈"
+  cloudy: "️☁️"
+  mostly_cloudy: "🌥"
+  partly_cloudy: "⛅"
+  mostly_sunny: "️🌤️"
+  sunny: "☀️"
+
+  # time of day
+  sunrise: "🌅"
+  sunrise_mountains: "🌄"
+  cityscape: "️🏙️"
+  cityscape_dusk: "️🌇"
+  cityscape_night: "🌃"
+
+  # skin tones
+  light_skin_tone:        "🏻"
+  medium_light_skin_tone: "🏼"
+  medium_skin_tone:       "🏽"
+  medium_dark_skin_tone:  "🏾"
+  dark_skin_tone:         "🏿"
+
+  # family & ages
+  baby_bottle: "🍼"
+  baby:        "👶"
+  boy:         "👦"
+  girl:        "👧"
+  man:         "👨"
+  woman:       "👩"
+  old_man:     "👴"
+  old_woman:   "👵"
+
+  # hair styles
+  white_hair: "🦳"
+  curly_hair: "🦱"
+  red_hair:   "🦰"
+  bald:       "🦲"
+
+  # function row
+  new_moon:             "🌑"
+  waxing_crescent_moon: "🌒"
+  first_quarter_moon:   "🌓"
+  waxing_gibbous_moon:  "🌔"
+  full_moon:            "🌕"
+  waning_gibbous_moon:  "🌖"
+  last_quarter_moon:    "🌗"
+  waning_crescent_moon: "🌘"
+
+  # number row
+  tada:            "🎉"
+  heart:           "️❤️"
+  fire:            "🔥"
+  muscle:          "💪"
+  person_climbing: "🧗"
+  lab_coat:        "🥼"
+  rocket:          "🚀"
+
+  # upper row
+  joy:            "😂"
+  rofl:           "🤣"
+  star_struck:    "🤩"
+  love_struck:    "😍"
+  saluting_face:  "🫡"
+  shocked_face:   "🤯"
+  cold_sweat:     "😰"
+  monocle_face:   "🧐"
+
+  # home row
+  snap_fingers: "🫰"
+  ok_hand:      "👌"
+  pray:         "🙏"
+  sweat_smile:  "😅"
+  disappointed: "😞"
+  thinking:     "🤔"
+
+  # lower row
+  person_tipping_hand: "💁"
+  person_gesturing_ok: "🙆"
+  person_bowing:       "🙇"
+  person_raising_hand: "🙋"
+  person_gesturing_no: "🙅"
+  person_shrugging:    "🤷"
+
+  # bottom row
+  check:    "✅"
+  100:      "💯"
+  warning:  "⚠️"
+  cross:    "❌"
+  question: "❓"
+
+  # thumb cluster upper arc
+  astronaut: "🧑‍🚀"
+  nerd:      "🤓"
+  sparkles:  "✨"
+
+  # thumb cluster lower arc
+  raised_hands: "🙌"
+  point_up:     "☝️"
+  thumbs_up:    "👍"

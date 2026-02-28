@@ -1,0 +1,544 @@
+precedence: [LSFT, LALT, RALT, LCTL, RCTL, RSFT, LCTL_RSFT, RCTL_RSFT] # latter overrides former: RCTL_RSFT overrides all
+
+#
+# transforms:
+#   <group>:
+#     base: <name>
+#     <modifier>: <name>
+#
+# Where <modifier> is either LALT, RALT, LCTL, RCTL, or RSFT.
+#
+transforms:
+  I: { base: acute,   LCTL: diaeresis, RCTL: circumflex, RSFT: grave                                                                         }
+  E: { base: acute,   LCTL: diaeresis, RCTL: circumflex, RSFT: grave,   LALT: oe,      RALT: ae,     LCTL_RSFT: oe,       RCTL_RSFT: ae      }
+  A: { base: acute,   LCTL: diaeresis, RCTL: circumflex, RSFT: grave,   LALT: tilde,   RALT: ring,   LCTL_RSFT: tilde,    RCTL_RSFT: ring    }
+  Y: { base: acute,   LCTL: diaeresis                                                                                                        }
+  O: { base: acute,   LCTL: diaeresis, RCTL: circumflex, RSFT: grave,   LALT: tilde,   RALT: slash,  LCTL_RSFT: tilde,    RCTL_RSFT: slash   }
+  U: { base: acute,   LCTL: diaeresis, RCTL: circumflex, RSFT: grave                                                                         }
+  consonants:
+     { base: cedilla, LCTL: eszett,    RCTL: ntilde,     RSFT: micro                                                                         }
+  quotes_left:
+     { base: angle,   LCTL: curly,     RCTL: low,        RSFT: grave,   LALT: corner1, RALT: corner2, LCTL_RSFT: corner1, RCTL_RSFT: corner2 }
+  quotes_right:
+     { base: angle,   LCTL: curly,     RCTL: low,        RSFT: grave,   LALT: corner1, RALT: corner2, LCTL_RSFT: corner1, RCTL_RSFT: corner2 }
+  currency:
+     { base: dollar,  LCTL: euro,      RCTL: pound,      RSFT: generic, LALT: yen,     RALT: won,     LCTL_RSFT: yen    , RCTL_RSFT: won     }
+  sign:
+    base: copyright
+    LCTL: trademark
+
+#
+# characters:
+#   <group>:
+#     <name>: { <without_shift>, <with_shift> }
+#
+characters:
+  I:
+    acute:      { lower: "í",  upper: "Í"  }
+    diaeresis:  { lower: "ï",  upper: "Ï"  }
+    circumflex: { lower: "î",  upper: "Î"  }
+    grave:      { lower: "ì",  upper: "Ì"  }
+  E:
+    acute:      { lower: "é",  upper: "É"  }
+    diaeresis:  { lower: "ë",  upper: "Ë"  }
+    circumflex: { lower: "ê",  upper: "Ê"  }
+    grave:      { lower: "è",  upper: "È"  }
+    oe:         { lower: "œ",  upper: "Œ"  }
+    ae:         { lower: "æ",  upper: "Æ"  }
+  A:
+    acute:      { lower: "á",  upper: "Á"  }
+    diaeresis:  { lower: "ä",  upper: "Ä"  }
+    circumflex: { lower: "â",  upper: "Â"  }
+    grave:      { lower: "à",  upper: "À"  }
+    tilde:      { lower: "ã",  upper: "Ã"  }
+    ring:       { lower: "å",  upper: "Å"  }
+  Y:
+    acute:      { lower: "ý",  upper: "Ý"  }
+    diaeresis:  { lower: "ÿ",  upper: "Ÿ"  }
+  O:
+    acute:      { lower: "ó",  upper: "Ó"  }
+    diaeresis:  { lower: "ö",  upper: "Ö"  }
+    circumflex: { lower: "ô",  upper: "Ô"  }
+    grave:      { lower: "ò",  upper: "Ò"  }
+    tilde:      { lower: "õ",  upper: "Õ"  }
+    slash:      { lower: "ø",  upper: "Ø"  }
+  U:
+    acute:      { lower: "ú",  upper: "Ú"  }
+    diaeresis:  { lower: "ü",  upper: "Ü"  }
+    circumflex: { lower: "û",  upper: "Û"  }
+    grave:      { lower: "ù",  upper: "Ù"  }
+  consonants:
+    cedilla:    { lower: "ç",  upper: "Ç"  }
+    eszett:     { lower: "ß",  upper: "ẞ"  }
+    ntilde:     { lower: "ñ",  upper: "Ñ"  }
+    micro:               "µ"
+  quotes_left:
+    angle:      { lower: "‹",  upper: "«"  }
+    curly:      { lower: "‘",  upper: "“"  }
+    low:        { lower: "‚",  upper: "„"  }
+    corner1:    { lower: "「", upper: "﹁" }
+    corner2:    { lower: "『", upper: "﹃" }
+    grave:               "`"
+  quotes_right:
+    angle:      { lower: "›",  upper: "»"  }
+    curly:      { lower: "’",  upper: "”"  }
+    low:        { lower: "‚",  upper: "„"  }
+    corner1:    { lower: "」", upper: "﹂" }
+    corner2:    { lower: "』", upper: "﹄" }
+    grave:               "´"
+  currency:
+    dollar:     { lower: "$",  upper: "¢"  }
+    yen:                 "¥"
+    euro:                "€"
+    won:                 "₩"
+    pound:               "£"
+    generic:    { lower: "¤",  upper: "₿"  }
+  sign:
+    copyright: { regular: "©", shifted: "®" }
+    trademark: { regular: "™", shifted: "℠" }
+    landmark:  { section: "§", pilcrow: "¶" }
+    exclaim:   { left:    "¡", right:   "!" }
+    question:  { left:    "¿", right:   "?" }
+    ordinal:   { o:       "º", a:       "ª" }
+    angle:     { degree:  "°", pi:      "π" }
+    dash:      { endash:  "–", emdash:  "—" }
+
+#
+# codepoints:
+#   <name>: "<string_of_unicode_characters>"
+#
+codepoints:
+  currency_crypto: "₿"
+  currency_cent:   "¢"
+  currency_sign:   "¤"
+
+#
+# compositions:
+#   <character>:
+#     linux:   <keystrokes>
+#     macos:   <keystrokes>
+#     windows: <keystrokes>
+#
+# Where <keystrokes> is composed of ZMK keycodes with some specialities:
+# - "COMPOSE" is a special keyword that is replaced by COMPOSE_KEY_LINUX
+# - "ALT+" is a special prefix that is replaced by COMPOSE_SEQ_WINDOWS()
+#
+# For reference on Compose key shortcuts and the characters they produce:
+# - linux:   https://wiki.linuxquestions.org/wiki/Accented_Characters
+# - macos:   https://sites.psu.edu/symbolcodes/mac/codemac/
+# - windows: https://sites.psu.edu/symbolcodes/windows/codealt/
+#
+compositions:
+
+  ###
+  ## C
+  #
+
+  "ç":
+    linux:   COMPOSE COMMA C
+    macos:   LA(C)
+    windows: ALT+0231
+
+  "Ç":
+    linux:   COMPOSE COMMA LS(C)
+    macos:   LA(LS(C))
+    windows: ALT+0199
+
+  ###
+  ## I
+  #
+
+  "í":
+    linux:   COMPOSE SQT I
+    macos:   LA(E) I
+    windows: ALT+0237
+
+  "Í":
+    linux:   COMPOSE SQT LS(I)
+    macos:   LA(E) LS(I)
+    windows: ALT+0205
+
+  "ï":
+    linux:   COMPOSE DQT I
+    macos:   LA(U) I
+    windows: ALT+0239
+
+  "Ï":
+    linux:   COMPOSE DQT LS(I)
+    macos:   LA(U) LS(I)
+    windows: ALT+0207
+
+  "î":
+    linux:   COMPOSE CARET I
+    macos:   LA(I) I
+    windows: ALT+0238
+
+  "Î":
+    linux:   COMPOSE CARET LS(I)
+    macos:   LA(I) LS(I)
+    windows: ALT+0206
+
+  "ì":
+    linux:   COMPOSE GRAVE I
+    macos:   LA(GRAVE) I
+    windows: ALT+0236
+
+  "Ì":
+    linux:   COMPOSE GRAVE LS(I)
+    macos:   LA(GRAVE) LS(I)
+    windows: ALT+0206
+
+  ###
+  ## E
+  #
+
+  "é":
+    linux:   COMPOSE SQT E
+    macos:   LA(E) E
+    windows: ALT+0233
+
+  "É":
+    linux:   COMPOSE SQT LS(E)
+    macos:   LA(E) LS(E)
+    windows: ALT+0201
+
+  "ë":
+    linux:   COMPOSE DQT E
+    macos:   LA(U) E
+    windows: ALT+0235
+
+  "Ë":
+    linux:   COMPOSE DQT LS(E)
+    macos:   LA(U) LS(E)
+    windows: ALT+0203
+
+  "ê":
+    linux:   COMPOSE CARET E
+    macos:   LA(I) E
+    windows: ALT+0234
+
+  "Ê":
+    linux:   COMPOSE CARET LS(E)
+    macos:   LA(I) LS(E)
+    windows: ALT+0202
+
+  "è":
+    linux:   COMPOSE GRAVE E
+    macos:   LA(GRAVE) E
+    windows: ALT+0232
+
+  "È":
+    linux:   COMPOSE GRAVE LS(E)
+    macos:   LA(GRAVE) LS(E)
+    windows: ALT+0200
+
+  "œ":
+    linux:   COMPOSE O E
+    macos:   LA(Q)
+    windows: ALT+0156
+
+  "Œ":
+    linux:   COMPOSE LS(O) LS(E)
+    macos:   LA(LS(Q))
+    windows: ALT+0140
+
+  "æ":
+    linux:   COMPOSE A E
+    macos:   LA(SQT)
+    windows: ALT+0230
+
+  "Æ":
+    linux:   COMPOSE LS(A) LS(E)
+    macos:   LA(LS(SQT))
+    windows: ALT+0198
+
+  ###
+  ## A
+  #
+
+  "á":
+    linux:   COMPOSE SQT A
+    macos:   LA(E) A
+    windows: ALT+0225
+
+  "Á":
+    linux:   COMPOSE SQT LS(A)
+    macos:   LA(E) LS(A)
+    windows: ALT+0193
+
+  "ä":
+    linux:   COMPOSE DQT A
+    macos:   LA(U) A
+    windows: ALT+0228
+
+  "Ä":
+    linux:   COMPOSE DQT LS(A)
+    macos:   LA(U) LS(A)
+    windows: ALT+0196
+
+  "â":
+    linux:   COMPOSE CARET A
+    macos:   LA(I) A
+    windows: ALT+0226
+
+  "Â":
+    linux:   COMPOSE CARET LS(A)
+    macos:   LA(I) LS(A)
+    windows: ALT+0194
+
+  "à":
+    linux:   COMPOSE GRAVE A
+    macos:   LA(GRAVE) A
+    windows: ALT+0224
+
+  "À":
+    linux:   COMPOSE GRAVE LS(A)
+    macos:   LA(GRAVE) LS(A)
+    windows: ALT+0192
+
+  "ã":
+    linux:   COMPOSE TILDE A
+    macos:   LA(N) A
+    windows: ALT+0227
+
+  "Ã":
+    linux:   COMPOSE TILDE LS(A)
+    macos:   LA(N) LS(A)
+    windows: ALT+0195
+
+  "å":
+    linux:   COMPOSE O A
+    macos:   LA(A)
+    windows: ALT+0229
+
+  "Å":
+    linux:   COMPOSE O LS(A)
+    macos:   LA(LS(A))
+    windows: ALT+0197
+
+  ###
+  ## Y
+  #
+
+  "ý":
+    linux:   COMPOSE SQT Y
+    macos:   LA(E) Y
+    windows: ALT+0253
+
+  "Ý":
+    linux:   COMPOSE SQT LS(Y)
+    macos:   LA(E) LS(Y)
+    windows: ALT+0221
+
+  "ÿ":
+    linux:   COMPOSE DQT Y
+    macos:   LA(U) Y
+    windows: ALT+0255
+
+  "Ÿ":
+    linux:   COMPOSE DQT LS(Y)
+    macos:   LA(U) LS(Y)
+    windows: ALT+0159
+
+  ###
+  ## O
+  #
+
+  "ó":
+    linux:   COMPOSE SQT O
+    macos:   LA(E) O
+    windows: ALT+0243
+
+  "Ó":
+    linux:   COMPOSE SQT LS(O)
+    macos:   LA(E) LS(O)
+    windows: ALT+0211
+
+  "ö":
+    linux:   COMPOSE DQT O
+    macos:   LA(U) O
+    windows: ALT+0246
+
+  "Ö":
+    linux:   COMPOSE DQT LS(O)
+    macos:   LA(U) LS(O)
+    windows: ALT+0214
+
+  "ô":
+    linux:   COMPOSE CARET O
+    macos:   LA(I) O
+    windows: ALT+0244
+
+  "Ô":
+    linux:   COMPOSE CARET LS(O)
+    macos:   LA(I) LS(O)
+    windows: ALT+0212
+
+  "ò":
+    linux:   COMPOSE GRAVE O
+    macos:   LA(GRAVE) O
+    windows: ALT+0242
+
+  "Ò":
+    linux:   COMPOSE GRAVE LS(O)
+    macos:   LA(GRAVE) LS(O)
+    windows: ALT+0210
+
+  "õ":
+    linux:   COMPOSE TILDE O
+    macos:   LA(N) O
+    windows: ALT+0245
+
+  "Õ":
+    linux:   COMPOSE TILDE LS(O)
+    macos:   LA(N) LS(O)
+    windows: ALT+0213
+
+  "ø":
+    linux:   COMPOSE FSLH O
+    macos:   LA(O)
+    windows: ALT+0248
+
+  "Ø":
+    linux:   COMPOSE FSLH LS(O)
+    macos:   LA(LS(O))
+    windows: ALT+0216
+
+  ###
+  ## U
+  #
+
+  "ú":
+    linux:   COMPOSE SQT U
+    macos:   LA(E) U
+    windows: ALT+0250
+
+  "Ú":
+    linux:   COMPOSE SQT LS(U)
+    macos:   LA(E) LS(U)
+    windows: ALT+0218
+
+  "ü":
+    linux:   COMPOSE DQT U
+    macos:   LA(U) U
+    windows: ALT+0252
+
+  "Ü":
+    linux:   COMPOSE DQT LS(U)
+    macos:   LA(U) LS(U)
+    windows: ALT+0220
+
+  "û":
+    linux:   COMPOSE CARET U
+    macos:   LA(I) U
+    windows: ALT+0251
+
+  "Û":
+    linux:   COMPOSE CARET LS(U)
+    macos:   LA(I) LS(U)
+    windows: ALT+0219
+
+  "ù":
+    linux:   COMPOSE GRAVE U
+    macos:   LA(GRAVE) U
+    windows: ALT+0249
+
+  "Ù":
+    linux:   COMPOSE GRAVE LS(U)
+    macos:   LA(GRAVE) LS(U)
+    windows: ALT+0217
+
+  ###
+  ## S
+  #
+
+  "ß":
+    linux:   COMPOSE S S
+    macos:   LA(S)
+    windows: ALT+0223
+
+  "ẞ":
+    linux:   COMPOSE LS(S) LS(S)
+    macos:   LA(LS(S))
+    windows: # NOTE: U+1E9E has no alt-code per charmap.exe
+
+  ###
+  ## N
+  #
+
+  "ñ":
+    linux:   COMPOSE TILDE N
+    macos:   LA(N) N
+    windows: ALT+0241
+
+  "Ñ":
+    linux:   COMPOSE TILDE LS(N)
+    macos:   LA(N) LS(N)
+    windows: ALT+0209
+
+  ###
+  ## signs
+  #
+
+  "€":
+    linux:   COMPOSE E EQUAL
+    macos:   LA(LS(N2))
+    windows: ALT+0128
+
+  "°":
+    linux:   COMPOSE O O
+    macos:   LA(LS(N8))
+    windows: ALT+0176
+
+  "¡":
+    linux:   COMPOSE EXCL EXCL
+    macos:   LA(N1)
+    windows: ALT+0161
+
+  "¿":
+    linux:   COMPOSE QMARK QMARK
+    macos:   LA(LS(FSLH))
+    windows: ALT+0191
+
+  "µ":
+    linux:   COMPOSE M U
+    macos:   LA(M)
+    windows: ALT+0181
+
+  "§":
+    linux:   COMPOSE S O
+    macos:   LA(N6)
+    windows: ALT+0167
+
+  "¶":
+    linux:   COMPOSE P EXCL
+    macos:   LA(N7)
+    windows: ALT+0182
+
+  "º":
+    linux:   COMPOSE CARET UNDER O
+    macos:   LA(N0)
+    windows: ALT+0186
+
+  "ª":
+    linux:   COMPOSE CARET UNDER A
+    macos:   LA(N9)
+    windows: ALT+0170
+
+  "©":
+    linux:   COMPOSE O C
+    macos:   LA(G)
+    windows: ALT+0169
+
+  "®":
+    linux:   COMPOSE O R
+    macos:   LA(R)
+    windows: ALT+0174
+
+  "™":
+    linux:   COMPOSE T M
+    macos:   LA(N2)
+    windows: ALT+0153
+
+  "℠":
+    linux:   COMPOSE S M
