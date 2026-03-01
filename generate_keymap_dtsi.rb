@@ -39,7 +39,7 @@ out << <<~'DTSI'
 //
 // Kinesis Advantage 360 Pro - Keymap Behaviors, Combos, and Macros
 //
-// Ported from sunaku's Glove80 keymap v42-rc9 "Glorious Engrammer"
+// Ported from sunaku's Glove80 keymap v52 "Glorious Engrammer"
 // https://github.com/sunaku/glove80-keymaps
 //
 // This file is #include'd by adv360.keymap after positions.h and layer defs.
@@ -171,7 +171,7 @@ end
 
 # Find the normal_layer_ids boundary
 # In generated output, it's "0 1 2 ... N" where N = LAYER_Lower
-# For Adv360, LAYER_Lower = 24
+# For Adv360, LAYER_Lower = 23
 out << lines[combo_start..combo_end].map { |line|
   result = line.dup
   # Replace alpha layer IDs (combos on base layers only)
@@ -183,10 +183,10 @@ out << lines[combo_start..combo_end].map { |line|
   # Adv360 needs: layers = <0 1 2>; (QWERTY + macOS + Typing)
   result.gsub!(/layers = <0 1 2 3 4 5>/, 'layers = <0 1 2>')
   # Replace normal layer IDs (everything up to Lower)
-  # Glove80 had: layers = <0 1 2 ... 27> (28 layers, Lower=27)
-  # Adv360 needs: layers = <0 1 2 ... 24> (25 layers, Lower=24)
-  result.gsub!(/layers = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27>/,
-               'layers = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24>')
+  # Glove80 had: layers = <0 1 2 ... 26> (27 layers, Lower=26)
+  # Adv360 needs: layers = <0 1 2 ... 22> (23 layers, Lower=23)
+  result.gsub!(/layers = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26>/,
+               'layers = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22>')
   result
 }.join
 out << "\n"

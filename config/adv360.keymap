@@ -1,7 +1,7 @@
 /*
  * Kinesis Advantage 360 Pro - Glorious Engrammer (QWERTY-only port)
  *
- * Ported from sunaku's Glove80 keymap v42-rc9 "Glorious Engrammer"
+ * Ported from sunaku's Glove80 keymap v52 "Glorious Engrammer"
  * https://github.com/sunaku/glove80-keymaps
  *
  * SPDX-License-Identifier: MIT
@@ -20,37 +20,41 @@
 //
 // Layer index definitions (QWERTY-only: no Enthium/Colemak/Dvorak)
 //
+// v52 reordering: right finger layers reversed, Gaming moved up,
+// Mouse/System swapped, Emoji/World moved after macOS_right,
+// Mouse speed layers renamed (Mouse_slow/fast/warp).
+//
 //////////////////////////////////////////////////////////////////////////////
 
-#define LAYER_QWERTY      0
-#define LAYER_macOS        1
-#define LAYER_Typing       2
-#define LAYER_LeftPinky    3
-#define LAYER_LeftRingy    4
-#define LAYER_LeftMiddy    5
-#define LAYER_LeftIndex    6
-#define LAYER_RightPinky   7
-#define LAYER_RightRingy   8
-#define LAYER_RightMiddy   9
-#define LAYER_RightIndex  10
-#define LAYER_Cursor      11
-#define LAYER_Number      12
-#define LAYER_Function    13
-#define LAYER_Emoji       14
-#define LAYER_World       15
-#define LAYER_Symbol      16
-#define LAYER_System      17
-#define LAYER_Mouse       18
-#define LAYER_MouseSlow   19
-#define LAYER_MouseFast   20
-#define LAYER_MouseWarp   21
-#define LAYER_Gaming      22
-#define LAYER_Factory     23
-#define LAYER_Lower       24
-#define LAYER_macOS_left  25
-#define LAYER_macOS_right 26
-#define LAYER_macOS_lower 27
-#define LAYER_Magic       28
+#define LAYER_QWERTY        0
+#define LAYER_macOS          1
+#define LAYER_Typing         2
+#define LAYER_LeftPinky      3
+#define LAYER_LeftRingy      4
+#define LAYER_LeftMiddy      5
+#define LAYER_LeftIndex      6
+#define LAYER_RightIndex     7
+#define LAYER_RightMiddy     8
+#define LAYER_RightRingy     9
+#define LAYER_RightPinky    10
+#define LAYER_Gaming        11
+#define LAYER_Cursor        12
+#define LAYER_Number        13
+#define LAYER_Function      14
+#define LAYER_macOS_left    15
+#define LAYER_Symbol        16
+#define LAYER_Mouse         17
+#define LAYER_System        18
+#define LAYER_macOS_right   19
+#define LAYER_Emoji         20
+#define LAYER_World         21
+#define LAYER_Factory       22
+#define LAYER_Lower         23
+#define LAYER_macOS_lower   24
+#define LAYER_Mouse_slow    25
+#define LAYER_Mouse_fast    26
+#define LAYER_Mouse_warp    27
+#define LAYER_Magic         28
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -70,28 +74,26 @@
     //
     // Layer 0: QWERTY (base)
     //
-    // Glove80 Row 2 (numrow)  -> Adv360 Row 0 + mod col
-    // Glove80 Row 3 (alpha)   -> Adv360 Row 1 + mod col
-    // Glove80 Row 4 (home)    -> Adv360 Row 2 + mod col + palm
-    // Glove80 Row 5 (lower)   -> Adv360 Row 3 + middle
-    // Glove80 Row 6 (bottom)  -> Adv360 Row 4 + thumb
-    // Glove80 T1-T6           -> Adv360 thumb/palm/middle
+    // v52 thumb cluster reorganization:
+    //   T1 = Function ESC       T4 = Cursor BSPC
+    //   T2 = Lower (hold only)  T5 = Number DEL
+    //   T3 = PG_UP              T6 = PG_DN
     //
     //////////////////////////////////////////////////////////////////////////
 
     layer_QWERTY {
       display-name = "QWERTY";
       bindings = <
-        // Row 0: numrow (Glove80 Row 2: &none, N1..N5 | N6..N0, &none) + mod keys
+        // Row 0: numrow (Glove80 Row 2) + mod keys
         &none  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &tog LAYER_Function                                                            &mo LAYER_Lower  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &none
-        // Row 1: QWERTY (Glove80 Row 3: &none, Q W E R T | Y U I O P, MINUS) + mod keys
+        // Row 1: QWERTY (Glove80 Row 3) + mod keys
         &kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T  &none                                                                                &none  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp MINUS
-        // Row 2: home row (Glove80 Row 4: EQUAL, HRM_A..G | H..HRM_SEMI, SQT) + mod + palm
-        &kp EQUAL  &LeftPinky (A, LAYER_QWERTY)  &LeftRingy (S, LAYER_QWERTY)  &LeftMiddy (D, LAYER_QWERTY)  &LeftIndex (F, LAYER_QWERTY)  &kp G  &none    &thumb LAYER_Function ESC  &parang_right    &kp _HOME  &thumb LAYER_System TAB    &none  &kp H  &RightIndex (J, LAYER_QWERTY)  &RightMiddy (K, LAYER_QWERTY)  &RightRingy (L, LAYER_QWERTY)  &RightPinky (SEMI, LAYER_QWERTY)  &kp SQT
-        // Row 3: lower (Glove80 Row 5: sticky_shift, Z X C V B | N M , . /, sticky_shift) + middle
-        &sticky_key_modtap LSFT LSFT  &kp Z  &kp X  &kp C  &kp V  &kp B    &parang_left                                      &thumb LAYER_Cursor _END    &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &sticky_key_modtap RSFT RSFT
-        // Row 4: bottom (Glove80 Row 6: magic, GRAVE, LBKT, RBKT, Emoji_BSLH | World_PGUP, scroll_up, scroll_dn, PGDN, magic) + thumb
-        &magic LAYER_Magic 0  &kp GRAVE  &kp LBKT  &kp RBKT  &thumb LAYER_Emoji BSLH    &thumb LAYER_Cursor BACKSPACE  &thumb LAYER_Number DELETE  &mo LAYER_Lower    &mo LAYER_Lower  &thumb LAYER_Mouse ENTER  &thumb LAYER_Symbol SPACE    &thumb LAYER_World PAGE_UP  &msc MOUSE_SCROLL_UP  &msc MOUSE_SCROLL_DOWN  &kp PG_DN  &magic LAYER_Magic 0
+        // Row 2: home row (Glove80 Row 4) + mod + palm (T5=Number DEL, T6=PG_DN | T6=thums_down, T5=Mouse TAB)
+        &kp EQUAL  &LeftPinky (A, LAYER_QWERTY)  &LeftRingy (S, LAYER_QWERTY)  &LeftMiddy (D, LAYER_QWERTY)  &LeftIndex (F, LAYER_QWERTY)  &kp G  &none    &thumb LAYER_Number DELETE  &kp PG_DN    &thums_down  &thumb LAYER_Mouse TAB    &none  &kp H  &RightIndex (J, LAYER_QWERTY)  &RightMiddy (K, LAYER_QWERTY)  &RightRingy (L, LAYER_QWERTY)  &RightPinky (SEMI, LAYER_QWERTY)  &kp SQT
+        // Row 3: lower row (Glove80 Row 5) + middle (T4=Cursor BSPC | T4=Symbol SPACE)
+        &sticky_key_modtap LSFT LSFT  &kp Z  &kp X  &kp C  &kp V  &kp B    &thumb LAYER_Cursor BACKSPACE                                      &space LAYER_Symbol SPACE    &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &sticky_key_modtap RSFT RSFT
+        // Row 4: bottom (Glove80 Row 6) + thumb (T1=Func ESC, T2=Lower, T3=PG_UP | T3=thums_up, T2=Lower INS, T1=System ENTER)
+        &magic LAYER_Magic 0  &kp BSLH  &parang_left  &parang_right  &stumb LAYER_Emoji LSFT    &thumb LAYER_Function ESC  &mo LAYER_Lower  &kp PG_UP    &thums_up  &thumb LAYER_Lower INSERT  &thumb LAYER_System ENTER    &stumb LAYER_World RSFT  &kp LBKT  &kp RBKT  &kp GRAVE  &magic LAYER_Magic 0
       >;
     };
 
@@ -126,6 +128,8 @@
     //
     // Disables home row mods for pure typing (plain keys on home row).
     // Disables layer-tap on thumb keys too.
+    // v52: T2 is now &mo LAYER_Lower (no tap key), so &trans on T2.
+    //      T6 is now &kp PG_DN, so kp KEY_LH/RH_T6 works.
     //
     //////////////////////////////////////////////////////////////////////////
 
@@ -136,11 +140,11 @@
         &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
         // Row 1
         &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        // Row 2: plain keys instead of HRMs + plain thumb tap keys on palm
-        &trans  &kp LEFT_PINKY_KEY  &kp LEFT_RINGY_KEY  &kp LEFT_MIDDY_KEY  &kp LEFT_INDEX_KEY  &trans  &trans    &kp KEY_LH_T5  &kp KEY_LH_T6    &kp KEY_RH_T6  &kp KEY_RH_T5    &trans  &trans  &kp RIGHT_INDEX_KEY  &kp RIGHT_MIDDY_KEY  &kp RIGHT_RINGY_KEY  &kp RIGHT_PINKY_KEY  &trans
-        // Row 3: plain thumb keys on middle
+        // Row 2: plain keys instead of HRMs + plain thumb tap keys on palm (T5, T6)
+        &trans  &kp LEFT_PINKY_KEY  &kp LEFT_RINGY_KEY  &kp LEFT_MIDDY_KEY  &kp LEFT_INDEX_KEY  &trans  &trans    &kp KEY_LH_T5  &trans    &trans  &kp KEY_RH_T5    &trans  &trans  &kp RIGHT_INDEX_KEY  &kp RIGHT_MIDDY_KEY  &kp RIGHT_RINGY_KEY  &kp RIGHT_PINKY_KEY  &trans
+        // Row 3: plain thumb keys on middle (T4)
         &trans  &trans  &trans  &trans  &trans  &trans    &kp KEY_LH_T4                           &kp KEY_RH_T4    &trans  &trans  &trans  &trans  &trans  &trans
-        // Row 4: plain thumb keys on T1-T3
+        // Row 4: plain thumb keys on T1, T3 (T2 is &mo, no tap key → &trans)
         &trans  &trans  &trans  &trans  &kp KEY_LH_C2R6    &kp KEY_LH_T1  &trans  &trans    &trans  &trans  &kp KEY_RH_T1    &kp KEY_RH_C2R6  &trans  &trans  &trans  &trans
       >;
     };
@@ -149,24 +153,21 @@
     //
     // Layer 3: LeftPinky (bilateral enforcement)
     //
-    // Left hand taps keys, right hand types normally.
-    // Home row: &none on the triggering finger, cross-finger refs for others.
-    //
     //////////////////////////////////////////////////////////////////////////
 
     layer_LeftPinky {
       display-name = "LPinky";
       bindings = <
-        // Row 0 (Glove80 Row 2, dropping C6R2=0 outer key)
+        // Row 0 (Glove80 Row 2)
         &left_pinky_tap KEY_LH_C6R2  &left_pinky_tap KEY_LH_C5R2  &left_pinky_tap KEY_LH_C4R2  &left_pinky_tap KEY_LH_C3R2  &left_pinky_tap KEY_LH_C2R2  &left_pinky_tap KEY_LH_C1R2  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
         // Row 1 (Glove80 Row 3)
         &left_pinky_tap KEY_LH_C6R3  &left_pinky_tap KEY_LH_C5R3  &left_pinky_tap KEY_LH_C4R3  &left_pinky_tap KEY_LH_C3R3  &left_pinky_tap KEY_LH_C2R3  &left_pinky_tap KEY_LH_C1R3  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        // Row 2: home row (Glove80 Row 4); pinky finger = &none, others = cross-refs
-        &left_pinky_tap KEY_LH_C6R4  &none  &LeftPinkyRingy  &LeftPinkyMiddy  &LeftPinkyIndex  &left_pinky_tap KEY_LH_C1R4  &trans    &mo LAY_LH_T5  &mo LAY_LH_T6    &trans  &trans    &trans  &trans  &kp RIGHT_INDEX_KEY  &kp RIGHT_MIDDY_KEY  &kp RIGHT_RINGY_KEY  &kp RIGHT_PINKY_KEY  &trans
-        // Row 3 (Glove80 Row 5)
+        // Row 2: home row + palm (T5, T6); pinky = &none
+        &left_pinky_tap KEY_LH_C6R4  &none  &LeftPinkyRingy  &LeftPinkyMiddy  &LeftPinkyIndex  &left_pinky_tap KEY_LH_C1R4  &trans    &mo LAY_LH_T5  &left_pinky_tap KEY_LH_T6    &trans  &trans    &trans  &trans  &kp RIGHT_INDEX_KEY  &kp RIGHT_MIDDY_KEY  &kp RIGHT_RINGY_KEY  &kp RIGHT_PINKY_KEY  &trans
+        // Row 3 (Glove80 Row 5) + middle (T4)
         &trans  &left_pinky_tap KEY_LH_C5R5  &left_pinky_tap KEY_LH_C4R5  &left_pinky_tap KEY_LH_C3R5  &left_pinky_tap KEY_LH_C2R5  &left_pinky_tap KEY_LH_C1R5    &mo LAY_LH_T4                                     &trans    &trans  &trans  &trans  &trans  &trans  &trans
-        // Row 4 (Glove80 Row 6 + thumb T1-T3)
-        &trans  &left_pinky_tap KEY_LH_C5R6  &left_pinky_tap KEY_LH_C4R6  &left_pinky_tap KEY_LH_C3R6  &mo LAY_LH_C2R6    &mo LAY_LH_T1  &left_pinky_tap KEY_LH_T2  &left_pinky_tap KEY_LH_T3    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+        // Row 4 (Glove80 Row 6 + thumb T1-T3); v52: T2 = &mo LAY_LH_T2 (was &left_pinky_tap)
+        &trans  &left_pinky_tap KEY_LH_C5R6  &left_pinky_tap KEY_LH_C4R6  &left_pinky_tap KEY_LH_C3R6  &mo LAY_LH_C2R6    &mo LAY_LH_T1  &mo LAY_LH_T2  &left_pinky_tap KEY_LH_T3    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
       >;
     };
 
@@ -183,12 +184,12 @@
         &left_ringy_tap KEY_LH_C6R2  &left_ringy_tap KEY_LH_C5R2  &left_ringy_tap KEY_LH_C4R2  &left_ringy_tap KEY_LH_C3R2  &left_ringy_tap KEY_LH_C2R2  &left_ringy_tap KEY_LH_C1R2  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
         // Row 1
         &left_ringy_tap KEY_LH_C6R3  &left_ringy_tap KEY_LH_C5R3  &left_ringy_tap KEY_LH_C4R3  &left_ringy_tap KEY_LH_C3R3  &left_ringy_tap KEY_LH_C2R3  &left_ringy_tap KEY_LH_C1R3  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        // Row 2: home row; ringy finger = &none
-        &left_ringy_tap KEY_LH_C6R4  &LeftRingyPinky  &none  &LeftRingyMiddy  &LeftRingyIndex  &left_ringy_tap KEY_LH_C1R4  &trans    &mo LAY_LH_T5  &mo LAY_LH_T6    &trans  &trans    &trans  &trans  &kp RIGHT_INDEX_KEY  &kp RIGHT_MIDDY_KEY  &kp RIGHT_RINGY_KEY  &kp RIGHT_PINKY_KEY  &trans
+        // Row 2: home row + palm; ringy = &none
+        &left_ringy_tap KEY_LH_C6R4  &LeftRingyPinky  &none  &LeftRingyMiddy  &LeftRingyIndex  &left_ringy_tap KEY_LH_C1R4  &trans    &mo LAY_LH_T5  &left_ringy_tap KEY_LH_T6    &trans  &trans    &trans  &trans  &kp RIGHT_INDEX_KEY  &kp RIGHT_MIDDY_KEY  &kp RIGHT_RINGY_KEY  &kp RIGHT_PINKY_KEY  &trans
         // Row 3
         &trans  &left_ringy_tap KEY_LH_C5R5  &left_ringy_tap KEY_LH_C4R5  &left_ringy_tap KEY_LH_C3R5  &left_ringy_tap KEY_LH_C2R5  &left_ringy_tap KEY_LH_C1R5    &mo LAY_LH_T4                                     &trans    &trans  &trans  &trans  &trans  &trans  &trans
-        // Row 4
-        &trans  &left_ringy_tap KEY_LH_C5R6  &left_ringy_tap KEY_LH_C4R6  &left_ringy_tap KEY_LH_C3R6  &mo LAY_LH_C2R6    &mo LAY_LH_T1  &left_ringy_tap KEY_LH_T2  &left_ringy_tap KEY_LH_T3    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+        // Row 4: v52: T2 = &mo LAY_LH_T2
+        &trans  &left_ringy_tap KEY_LH_C5R6  &left_ringy_tap KEY_LH_C4R6  &left_ringy_tap KEY_LH_C3R6  &mo LAY_LH_C2R6    &mo LAY_LH_T1  &mo LAY_LH_T2  &left_ringy_tap KEY_LH_T3    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
       >;
     };
 
@@ -205,12 +206,12 @@
         &left_middy_tap KEY_LH_C6R2  &left_middy_tap KEY_LH_C5R2  &left_middy_tap KEY_LH_C4R2  &left_middy_tap KEY_LH_C3R2  &left_middy_tap KEY_LH_C2R2  &left_middy_tap KEY_LH_C1R2  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
         // Row 1
         &left_middy_tap KEY_LH_C6R3  &left_middy_tap KEY_LH_C5R3  &left_middy_tap KEY_LH_C4R3  &left_middy_tap KEY_LH_C3R3  &left_middy_tap KEY_LH_C2R3  &left_middy_tap KEY_LH_C1R3  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        // Row 2: home row; middy finger = &none
-        &left_middy_tap KEY_LH_C6R4  &LeftMiddyPinky  &LeftMiddyRingy  &none  &LeftMiddyIndex  &left_middy_tap KEY_LH_C1R4  &trans    &mo LAY_LH_T5  &mo LAY_LH_T6    &trans  &trans    &trans  &trans  &kp RIGHT_INDEX_KEY  &kp RIGHT_MIDDY_KEY  &kp RIGHT_RINGY_KEY  &kp RIGHT_PINKY_KEY  &trans
+        // Row 2: home row + palm; middy = &none
+        &left_middy_tap KEY_LH_C6R4  &LeftMiddyPinky  &LeftMiddyRingy  &none  &LeftMiddyIndex  &left_middy_tap KEY_LH_C1R4  &trans    &mo LAY_LH_T5  &left_middy_tap KEY_LH_T6    &trans  &trans    &trans  &trans  &kp RIGHT_INDEX_KEY  &kp RIGHT_MIDDY_KEY  &kp RIGHT_RINGY_KEY  &kp RIGHT_PINKY_KEY  &trans
         // Row 3
         &trans  &left_middy_tap KEY_LH_C5R5  &left_middy_tap KEY_LH_C4R5  &left_middy_tap KEY_LH_C3R5  &left_middy_tap KEY_LH_C2R5  &left_middy_tap KEY_LH_C1R5    &mo LAY_LH_T4                                     &trans    &trans  &trans  &trans  &trans  &trans  &trans
-        // Row 4
-        &trans  &left_middy_tap KEY_LH_C5R6  &left_middy_tap KEY_LH_C4R6  &left_middy_tap KEY_LH_C3R6  &mo LAY_LH_C2R6    &mo LAY_LH_T1  &left_middy_tap KEY_LH_T2  &left_middy_tap KEY_LH_T3    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+        // Row 4: v52: T2 = &mo LAY_LH_T2
+        &trans  &left_middy_tap KEY_LH_C5R6  &left_middy_tap KEY_LH_C4R6  &left_middy_tap KEY_LH_C3R6  &mo LAY_LH_C2R6    &mo LAY_LH_T1  &mo LAY_LH_T2  &left_middy_tap KEY_LH_T3    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
       >;
     };
 
@@ -227,84 +228,20 @@
         &left_index_tap KEY_LH_C6R2  &left_index_tap KEY_LH_C5R2  &left_index_tap KEY_LH_C4R2  &left_index_tap KEY_LH_C3R2  &left_index_tap KEY_LH_C2R2  &left_index_tap KEY_LH_C1R2  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
         // Row 1
         &left_index_tap KEY_LH_C6R3  &left_index_tap KEY_LH_C5R3  &left_index_tap KEY_LH_C4R3  &left_index_tap KEY_LH_C3R3  &left_index_tap KEY_LH_C2R3  &left_index_tap KEY_LH_C1R3  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        // Row 2: home row; index finger = &none
-        &left_index_tap KEY_LH_C6R4  &LeftIndexPinky  &LeftIndexRingy  &LeftIndexMiddy  &none  &left_index_tap KEY_LH_C1R4  &trans    &mo LAY_LH_T5  &mo LAY_LH_T6    &trans  &trans    &trans  &trans  &kp RIGHT_INDEX_KEY  &kp RIGHT_MIDDY_KEY  &kp RIGHT_RINGY_KEY  &kp RIGHT_PINKY_KEY  &trans
+        // Row 2: home row + palm; index = &none
+        &left_index_tap KEY_LH_C6R4  &LeftIndexPinky  &LeftIndexRingy  &LeftIndexMiddy  &none  &left_index_tap KEY_LH_C1R4  &trans    &mo LAY_LH_T5  &left_index_tap KEY_LH_T6    &trans  &trans    &trans  &trans  &kp RIGHT_INDEX_KEY  &kp RIGHT_MIDDY_KEY  &kp RIGHT_RINGY_KEY  &kp RIGHT_PINKY_KEY  &trans
         // Row 3
         &trans  &left_index_tap KEY_LH_C5R5  &left_index_tap KEY_LH_C4R5  &left_index_tap KEY_LH_C3R5  &left_index_tap KEY_LH_C2R5  &left_index_tap KEY_LH_C1R5    &mo LAY_LH_T4                                     &trans    &trans  &trans  &trans  &trans  &trans  &trans
-        // Row 4
-        &trans  &left_index_tap KEY_LH_C5R6  &left_index_tap KEY_LH_C4R6  &left_index_tap KEY_LH_C3R6  &mo LAY_LH_C2R6    &mo LAY_LH_T1  &left_index_tap KEY_LH_T2  &left_index_tap KEY_LH_T3    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+        // Row 4: v52: T2 = &mo LAY_LH_T2
+        &trans  &left_index_tap KEY_LH_C5R6  &left_index_tap KEY_LH_C4R6  &left_index_tap KEY_LH_C3R6  &mo LAY_LH_C2R6    &mo LAY_LH_T1  &mo LAY_LH_T2  &left_index_tap KEY_LH_T3    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
       >;
     };
 
     //////////////////////////////////////////////////////////////////////////
     //
-    // Layer 7: RightPinky (bilateral enforcement)
+    // Layer 7: RightIndex (bilateral enforcement)
     //
-    //////////////////////////////////////////////////////////////////////////
-
-    layer_RightPinky {
-      display-name = "RPinky";
-      bindings = <
-        // Row 0
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_pinky_tap KEY_RH_C1R2  &right_pinky_tap KEY_RH_C2R2  &right_pinky_tap KEY_RH_C3R2  &right_pinky_tap KEY_RH_C4R2  &right_pinky_tap KEY_RH_C5R2  &right_pinky_tap KEY_RH_C6R2
-        // Row 1
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_pinky_tap KEY_RH_C1R3  &right_pinky_tap KEY_RH_C2R3  &right_pinky_tap KEY_RH_C3R3  &right_pinky_tap KEY_RH_C4R3  &right_pinky_tap KEY_RH_C5R3  &right_pinky_tap KEY_RH_C6R3
-        // Row 2: home row; pinky finger = &none
-        &trans  &kp LEFT_PINKY_KEY  &kp LEFT_RINGY_KEY  &kp LEFT_MIDDY_KEY  &kp LEFT_INDEX_KEY  &trans  &trans    &trans  &trans    &mo LAY_RH_T6  &mo LAY_RH_T5    &trans  &right_pinky_tap KEY_RH_C1R4  &RightPinkyIndex  &RightPinkyMiddy  &RightPinkyRingy  &none  &right_pinky_tap KEY_RH_C6R4
-        // Row 3
-        &trans  &trans  &trans  &trans  &trans  &trans    &trans                                   &mo LAY_RH_T4    &right_pinky_tap KEY_RH_C1R5  &right_pinky_tap KEY_RH_C2R5  &right_pinky_tap KEY_RH_C3R5  &right_pinky_tap KEY_RH_C4R5  &right_pinky_tap KEY_RH_C5R5  &trans
-        // Row 4
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &right_pinky_tap KEY_RH_T3  &right_pinky_tap KEY_RH_T2  &mo LAY_RH_T1    &mo LAY_RH_C2R6  &right_pinky_tap KEY_RH_C3R6  &right_pinky_tap KEY_RH_C4R6  &right_pinky_tap KEY_RH_C5R6  &trans
-      >;
-    };
-
-    //////////////////////////////////////////////////////////////////////////
-    //
-    // Layer 8: RightRingy (bilateral enforcement)
-    //
-    //////////////////////////////////////////////////////////////////////////
-
-    layer_RightRingy {
-      display-name = "RRingy";
-      bindings = <
-        // Row 0
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_ringy_tap KEY_RH_C1R2  &right_ringy_tap KEY_RH_C2R2  &right_ringy_tap KEY_RH_C3R2  &right_ringy_tap KEY_RH_C4R2  &right_ringy_tap KEY_RH_C5R2  &right_ringy_tap KEY_RH_C6R2
-        // Row 1
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_ringy_tap KEY_RH_C1R3  &right_ringy_tap KEY_RH_C2R3  &right_ringy_tap KEY_RH_C3R3  &right_ringy_tap KEY_RH_C4R3  &right_ringy_tap KEY_RH_C5R3  &right_ringy_tap KEY_RH_C6R3
-        // Row 2: home row; ringy finger = &none
-        &trans  &kp LEFT_PINKY_KEY  &kp LEFT_RINGY_KEY  &kp LEFT_MIDDY_KEY  &kp LEFT_INDEX_KEY  &trans  &trans    &trans  &trans    &mo LAY_RH_T6  &mo LAY_RH_T5    &trans  &right_ringy_tap KEY_RH_C1R4  &RightRingyIndex  &RightRingyMiddy  &none  &RightRingyPinky  &right_ringy_tap KEY_RH_C6R4
-        // Row 3
-        &trans  &trans  &trans  &trans  &trans  &trans    &trans                                   &mo LAY_RH_T4    &right_ringy_tap KEY_RH_C1R5  &right_ringy_tap KEY_RH_C2R5  &right_ringy_tap KEY_RH_C3R5  &right_ringy_tap KEY_RH_C4R5  &right_ringy_tap KEY_RH_C5R5  &trans
-        // Row 4
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &right_ringy_tap KEY_RH_T3  &right_ringy_tap KEY_RH_T2  &mo LAY_RH_T1    &mo LAY_RH_C2R6  &right_ringy_tap KEY_RH_C3R6  &right_ringy_tap KEY_RH_C4R6  &right_ringy_tap KEY_RH_C5R6  &trans
-      >;
-    };
-
-    //////////////////////////////////////////////////////////////////////////
-    //
-    // Layer 9: RightMiddy (bilateral enforcement)
-    //
-    //////////////////////////////////////////////////////////////////////////
-
-    layer_RightMiddy {
-      display-name = "RMiddy";
-      bindings = <
-        // Row 0
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_middy_tap KEY_RH_C1R2  &right_middy_tap KEY_RH_C2R2  &right_middy_tap KEY_RH_C3R2  &right_middy_tap KEY_RH_C4R2  &right_middy_tap KEY_RH_C5R2  &right_middy_tap KEY_RH_C6R2
-        // Row 1
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_middy_tap KEY_RH_C1R3  &right_middy_tap KEY_RH_C2R3  &right_middy_tap KEY_RH_C3R3  &right_middy_tap KEY_RH_C4R3  &right_middy_tap KEY_RH_C5R3  &right_middy_tap KEY_RH_C6R3
-        // Row 2: home row; middy finger = &none
-        &trans  &kp LEFT_PINKY_KEY  &kp LEFT_RINGY_KEY  &kp LEFT_MIDDY_KEY  &kp LEFT_INDEX_KEY  &trans  &trans    &trans  &trans    &mo LAY_RH_T6  &mo LAY_RH_T5    &trans  &right_middy_tap KEY_RH_C1R4  &RightMiddyIndex  &none  &RightMiddyRingy  &RightMiddyPinky  &right_middy_tap KEY_RH_C6R4
-        // Row 3
-        &trans  &trans  &trans  &trans  &trans  &trans    &trans                                   &mo LAY_RH_T4    &right_middy_tap KEY_RH_C1R5  &right_middy_tap KEY_RH_C2R5  &right_middy_tap KEY_RH_C3R5  &right_middy_tap KEY_RH_C4R5  &right_middy_tap KEY_RH_C5R5  &trans
-        // Row 4
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &right_middy_tap KEY_RH_T3  &right_middy_tap KEY_RH_T2  &mo LAY_RH_T1    &mo LAY_RH_C2R6  &right_middy_tap KEY_RH_C3R6  &right_middy_tap KEY_RH_C4R6  &right_middy_tap KEY_RH_C5R6  &trans
-      >;
-    };
-
-    //////////////////////////////////////////////////////////////////////////
-    //
-    // Layer 10: RightIndex (bilateral enforcement)
+    // v52: reversed order (was layer 10, now layer 7)
     //
     //////////////////////////////////////////////////////////////////////////
 
@@ -315,264 +252,84 @@
         &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_index_tap KEY_RH_C1R2  &right_index_tap KEY_RH_C2R2  &right_index_tap KEY_RH_C3R2  &right_index_tap KEY_RH_C4R2  &right_index_tap KEY_RH_C5R2  &right_index_tap KEY_RH_C6R2
         // Row 1
         &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_index_tap KEY_RH_C1R3  &right_index_tap KEY_RH_C2R3  &right_index_tap KEY_RH_C3R3  &right_index_tap KEY_RH_C4R3  &right_index_tap KEY_RH_C5R3  &right_index_tap KEY_RH_C6R3
-        // Row 2: home row; index finger = &none
-        &trans  &kp LEFT_PINKY_KEY  &kp LEFT_RINGY_KEY  &kp LEFT_MIDDY_KEY  &kp LEFT_INDEX_KEY  &trans  &trans    &trans  &trans    &mo LAY_RH_T6  &mo LAY_RH_T5    &trans  &right_index_tap KEY_RH_C1R4  &none  &RightIndexMiddy  &RightIndexRingy  &RightIndexPinky  &right_index_tap KEY_RH_C6R4
+        // Row 2: home row + palm; index = &none
+        &trans  &kp LEFT_PINKY_KEY  &kp LEFT_RINGY_KEY  &kp LEFT_MIDDY_KEY  &kp LEFT_INDEX_KEY  &trans  &trans    &trans  &trans    &right_index_tap KEY_RH_T6  &mo LAY_RH_T5    &trans  &right_index_tap KEY_RH_C1R4  &none  &RightIndexMiddy  &RightIndexRingy  &RightIndexPinky  &right_index_tap KEY_RH_C6R4
         // Row 3
         &trans  &trans  &trans  &trans  &trans  &trans    &trans                                   &mo LAY_RH_T4    &right_index_tap KEY_RH_C1R5  &right_index_tap KEY_RH_C2R5  &right_index_tap KEY_RH_C3R5  &right_index_tap KEY_RH_C4R5  &right_index_tap KEY_RH_C5R5  &trans
-        // Row 4
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &right_index_tap KEY_RH_T3  &right_index_tap KEY_RH_T2  &mo LAY_RH_T1    &mo LAY_RH_C2R6  &right_index_tap KEY_RH_C3R6  &right_index_tap KEY_RH_C4R6  &right_index_tap KEY_RH_C5R6  &trans
+        // Row 4: v52: T2 = &mo LAY_RH_T2 (was &right_index_tap)
+        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &right_index_tap KEY_RH_T3  &mo LAY_RH_T2  &mo LAY_RH_T1    &mo LAY_RH_C2R6  &right_index_tap KEY_RH_C3R6  &right_index_tap KEY_RH_C4R6  &right_index_tap KEY_RH_C5R6  &trans
       >;
     };
 
     //////////////////////////////////////////////////////////////////////////
     //
-    // Layer 11: Cursor
-    //
-    // Navigation and editing: arrows, word/line selection, undo/redo.
-    // Left hand: editing actions. Right hand: movement.
+    // Layer 8: RightMiddy (bilateral enforcement)
     //
     //////////////////////////////////////////////////////////////////////////
 
-    layer_Cursor {
-      display-name = "Cursor";
+    layer_RightMiddy {
+      display-name = "RMiddy";
       bindings = <
         // Row 0
-        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_middy_tap KEY_RH_C1R2  &right_middy_tap KEY_RH_C2R2  &right_middy_tap KEY_RH_C3R2  &right_middy_tap KEY_RH_C4R2  &right_middy_tap KEY_RH_C5R2  &right_middy_tap KEY_RH_C6R2
         // Row 1
-        &none  &kp ESC  &kp INS  &kp LS(TAB)  &kp DEL  &none  &none                                         &none  &none  &none  &none  &none  &none  &none
-        // Row 2: editing + mods on left; movement on right
-        &none  &kp RET  &kp SPACE  &kp TAB  &kp BSPC  &kp _CUT  &none    &none  &none    &none  &none    &none  &kp _CUT  &kp LS(TAB)  &kp _UNDO  &kp _REDO  &kp TAB  &none
-        // Row 3: mods + selection on left; arrows on right
-        &sk LSHFT  &kp LEFT_PINKY_MOD  &kp LEFT_RINGY_MOD  &kp LEFT_MIDDY_MOD  &kp LEFT_INDEX_MOD  &kp _COPY    &none                                     &none    &kp _COPY  &kp LEFT  &kp UP  &kp DOWN  &kp RIGHT  &sk LSHFT
-        // Row 4: selection tools on left; page nav on right
-        &kp _C(L)  &select_all  &select_line  &select_word  &kp _FIND    &none  &none  &none    &select_none  &extend_line  &extend_word    &kp _PASTE  &kp _HOME  &kp PG_UP  &kp PG_DN  &kp _END
-      >;
-    };
-
-    //////////////////////////////////////////////////////////////////////////
-    //
-    // Layer 12: Number
-    //
-    // Number pad on right hand, editing on left hand.
-    //
-    //////////////////////////////////////////////////////////////////////////
-
-    layer_Number {
-      display-name = "Number";
-      bindings = <
-        // Row 0
-        &none  &none  &none  &none  &none  &none  &none                                                      &none  &kp A  &kp B  &kp C  &kp D  &kp E  &none
-        // Row 1
-        &none  &kp ESC  &kp INS  &kp LS(TAB)  &kp DEL  &none  &none                                         &none  &kp LS(BSLH)  &kp LS(N3)  &kp LS(N4)  &kp LS(N6)  &kp LS(GRAVE)  &kp LS(N1)
-        // Row 2: editing on left; numpad on right
-        &kp E  &kp RET  &kp SPACE  &kp TAB  &kp BSPC  &kp N0  &none    &tog LAYER_Number  &none    &none  &none    &none  &kp LS(G)  &kp N7  &kp N8  &kp N9  &kp LS(SEMI)  &kp LS(N5)
-        // Row 3: mods on left; numbers 4-6 on right
-        &sk LSHFT  &kp LEFT_PINKY_MOD  &kp LEFT_RINGY_MOD  &kp LEFT_MIDDY_MOD  &kp LEFT_INDEX_MOD  &kp X    &none                                     &none    &kp K  &kp N4  &kp N5  &kp N6  &kp MINUS  &kp LS(EQUAL)
-        // Row 4: find/undo on left; numbers 1-3 + operators on right
-        &kp LS(MINUS)  &select_all  &select_line  &select_word  &kp _FIND    &none  &none  &none    &kp LS(COMMA)  &kp LS(DOT)  &kp COMMA    &kp J  &kp N1  &kp N2  &kp N3  &kp FSLH
-      >;
-    };
-
-    //////////////////////////////////////////////////////////////////////////
-    //
-    // Layer 13: Function
-    //
-    // F1-F15 on right hand, media controls, editing on left.
-    //
-    //////////////////////////////////////////////////////////////////////////
-
-    layer_Function {
-      display-name = "Fn";
-      bindings = <
-        // Row 0
-        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
-        // Row 1
-        &none  &kp ESC  &kp INS  &kp LS(TAB)  &kp DEL  &none  &none                                         &none  &kp C_MEDIA_HOME  &kp C_PLAY  &kp C_PREV  &kp C_NEXT  &kp C_STOP  &kp C_EJECT
-        // Row 2: editing on left; F7-F10 on right
-        &none  &kp RET  &kp SPACE  &kp TAB  &kp BSPC  &kp K_CALC  &none    &none  &none    &none  &none    &none  &kp K_CALC  &kp F7  &kp F8  &kp F9  &kp F10  &kp F13
-        // Row 3: mods on left; F4-F6 on right
-        &sk LSHFT  &kp LEFT_PINKY_MOD  &kp LEFT_RINGY_MOD  &kp LEFT_MIDDY_MOD  &kp LEFT_INDEX_MOD  &kp K_WWW    &none                                     &none    &kp K_WWW  &kp F4  &kp F5  &kp F6  &kp F11  &kp F14
-        // Row 4: undo/redo on left; F1-F3 + media on right
-        &none  &select_all  &select_line  &select_word  &kp _FIND    &tog LAYER_Function  &none  &none    &kp C_PP  &kp C_PREV  &kp C_NEXT    &kp _FILES  &kp F1  &kp F2  &kp F3  &kp F12
-      >;
-    };
-
-    //////////////////////////////////////////////////////////////////////////
-    //
-    // Layer 14: Emoji
-    //
-    // Emoji macros across the entire keyboard.
-    //
-    //////////////////////////////////////////////////////////////////////////
-
-    layer_Emoji {
-      display-name = "Emoji";
-      bindings = <
-        // Row 0
-        &emoji_cloudy  &emoji_mostly_cloudy  &emoji_partly_cloudy  &emoji_mostly_sunny  &emoji_sunny  &none  &none                                     &none  &none  &emoji_new_moon  &emoji_moon_crescent  &emoji_moon_quarter  &emoji_moon_gibbous  &emoji_full_moon
-        // Row 1
-        &emoji_rainbow  &emoji_light_skin_tone  &emoji_medium_light_skin_tone  &emoji_medium_skin_tone  &emoji_medium_dark_skin_tone  &emoji_dark_skin_tone  &none                                     &none  &emoji_theme_party  &emoji_theme_love  &emoji_theme_nature  &emoji_theme_strength  &emoji_theme_effort  &emoji_theme_science
-        // Row 2
-        &emoji_left_arrow  &emoji_bald  &emoji_red_hair  &emoji_curly_hair  &emoji_white_hair  &emoji_right_arrow  &none    &none  &none    &none  &none    &none  &emoji_face_laugh  &emoji_face_smile  &emoji_face_eyes  &emoji_face_joke  &emoji_face_fear  &emoji_face_surprise
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_middy_tap KEY_RH_C1R3  &right_middy_tap KEY_RH_C2R3  &right_middy_tap KEY_RH_C3R3  &right_middy_tap KEY_RH_C4R3  &right_middy_tap KEY_RH_C5R3  &right_middy_tap KEY_RH_C6R3
+        // Row 2: home row + palm; middy = &none
+        &trans  &kp LEFT_PINKY_KEY  &kp LEFT_RINGY_KEY  &kp LEFT_MIDDY_KEY  &kp LEFT_INDEX_KEY  &trans  &trans    &trans  &trans    &right_middy_tap KEY_RH_T6  &mo LAY_RH_T5    &trans  &right_middy_tap KEY_RH_C1R4  &RightMiddyIndex  &none  &RightMiddyRingy  &RightMiddyPinky  &right_middy_tap KEY_RH_C6R4
         // Row 3
-        &emoji_male_sign  &emoji_hair_style_preset  &emoji_skin_tone_preset  &emoji_gender_sign_preset  &sk LSHFT  &emoji_female_sign    &none                                     &none    &emoji_gesture_attention  &emoji_gesture_approval  &emoji_gesture_gratitude  &emoji_gesture_anxiety  &emoji_gesture_despair  &emoji_gesture_curious
-        // Row 4
-        &emoji_old_man  &emoji_man  &emoji_boy  &emoji_girl  &emoji_woman    &emoji_old_woman  &emoji_cityscape  &emoji_cityscape_dusk    &emoji_cityscape_night  &emoji_theme_magic  &emoji_theme_space    &emoji_theme_awesome  &emoji_person_tipping_hand  &emoji_person_gesturing_ok  &emoji_person_bowing  &emoji_person_raising_hand
+        &trans  &trans  &trans  &trans  &trans  &trans    &trans                                   &mo LAY_RH_T4    &right_middy_tap KEY_RH_C1R5  &right_middy_tap KEY_RH_C2R5  &right_middy_tap KEY_RH_C3R5  &right_middy_tap KEY_RH_C4R5  &right_middy_tap KEY_RH_C5R5  &trans
+        // Row 4: v52: T2 = &mo LAY_RH_T2
+        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &right_middy_tap KEY_RH_T3  &mo LAY_RH_T2  &mo LAY_RH_T1    &mo LAY_RH_C2R6  &right_middy_tap KEY_RH_C3R6  &right_middy_tap KEY_RH_C4R6  &right_middy_tap KEY_RH_C5R6  &trans
       >;
     };
 
     //////////////////////////////////////////////////////////////////////////
     //
-    // Layer 15: World
-    //
-    // International characters (accented vowels, special consonants, etc.)
+    // Layer 9: RightRingy (bilateral enforcement)
     //
     //////////////////////////////////////////////////////////////////////////
 
-    layer_World {
-      display-name = "World";
+    layer_RightRingy {
+      display-name = "RRingy";
       bindings = <
         // Row 0
-        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_ringy_tap KEY_RH_C1R2  &right_ringy_tap KEY_RH_C2R2  &right_ringy_tap KEY_RH_C3R2  &right_ringy_tap KEY_RH_C4R2  &right_ringy_tap KEY_RH_C5R2  &right_ringy_tap KEY_RH_C6R2
         // Row 1
-        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
-        // Row 2: accented vowels on left; sticky mods on right
-        &none  &none  &world_y_base  &world_o_base  &world_u_base  &world_sign_angle  &none    &none  &none    &none  &none    &none  &none  &none  &sk LALT  &sk RALT  &none  &none
-        // Row 3: consonants + accented vowels on left; sticky mods on right
-        &none  &world_consonants_base  &world_i_base  &world_a_base  &world_e_base  &world_sign_dash    &none                                     &none    &none  &sk LSHFT  &sk LCTRL  &sk RCTRL  &sk RSHFT  &none
-        // Row 4: currency + quotes on left; toggle on right
-        &world_currency_base  &world_quotes_left_base  &world_sign_landmark  &world_sign_ordinal  &world_sign_exclaim    &world_sign_question  &none  &none    &none  &none  &none    &none  &tog LAYER_World  &none  &none  &none
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_ringy_tap KEY_RH_C1R3  &right_ringy_tap KEY_RH_C2R3  &right_ringy_tap KEY_RH_C3R3  &right_ringy_tap KEY_RH_C4R3  &right_ringy_tap KEY_RH_C5R3  &right_ringy_tap KEY_RH_C6R3
+        // Row 2: home row + palm; ringy = &none
+        &trans  &kp LEFT_PINKY_KEY  &kp LEFT_RINGY_KEY  &kp LEFT_MIDDY_KEY  &kp LEFT_INDEX_KEY  &trans  &trans    &trans  &trans    &right_ringy_tap KEY_RH_T6  &mo LAY_RH_T5    &trans  &right_ringy_tap KEY_RH_C1R4  &RightRingyIndex  &RightRingyMiddy  &none  &RightRingyPinky  &right_ringy_tap KEY_RH_C6R4
+        // Row 3
+        &trans  &trans  &trans  &trans  &trans  &trans    &trans                                   &mo LAY_RH_T4    &right_ringy_tap KEY_RH_C1R5  &right_ringy_tap KEY_RH_C2R5  &right_ringy_tap KEY_RH_C3R5  &right_ringy_tap KEY_RH_C4R5  &right_ringy_tap KEY_RH_C5R5  &trans
+        // Row 4: v52: T2 = &mo LAY_RH_T2
+        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &right_ringy_tap KEY_RH_T3  &mo LAY_RH_T2  &mo LAY_RH_T1    &mo LAY_RH_C2R6  &right_ringy_tap KEY_RH_C3R6  &right_ringy_tap KEY_RH_C4R6  &right_ringy_tap KEY_RH_C5R6  &trans
       >;
     };
 
     //////////////////////////////////////////////////////////////////////////
     //
-    // Layer 16: Symbol
-    //
-    // Programming symbols on left hand, editing on right hand.
+    // Layer 10: RightPinky (bilateral enforcement)
     //
     //////////////////////////////////////////////////////////////////////////
 
-    layer_Symbol {
-      display-name = "Symbol";
+    layer_RightPinky {
+      display-name = "RPinky";
       bindings = <
         // Row 0
-        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
-        // Row 1: backticks, parens, delimiters
-        &triple_backtick  &kp GRAVE  &kp LS(N9)  &kp LS(N0)  &kp SEMI  &kp COMMA  &none                     &none  &none  &none  &none  &none  &none  &none
-        // Row 2: brackets, operators
-        &kp LS(N1)  &kp LBKT  &kp LS(LBKT)  &kp LS(RBKT)  &kp RBKT  &kp LS(FSLH)  &none    &none  &none    &none  &none    &none  &kp DOT  &kp DEL  &kp LS(TAB)  &kp INS  &kp ESC  &none
-        // Row 3: math symbols, comparisons
-        &kp LS(N3)  &kp LS(N6)  &kp EQUAL  &kp LS(MINUS)  &kp LS(N4)  &kp LS(N8)    &none                   &none    &kp COMMA  &kp BSPC  &kp TAB  &kp SPACE  &kp RET  &none
-        // Row 4: remaining symbols
-        &kp LS(GRAVE)  &kp LS(COMMA)  &kp LS(BSLH)  &kp MINUS  &kp LS(DOT)    &kp FSLH  &kp BSLH  &kp DOT    &kp LS(N8)  &none  &none    &none  &kp LS(SINGLE_QUOTE)  &kp SQT  &kp GRAVE  &kp BSLH
-      >;
-    };
-
-    //////////////////////////////////////////////////////////////////////////
-    //
-    // Layer 17: System
-    //
-    // RGB underglow, system keys, lock/sleep/power.
-    //
-    //////////////////////////////////////////////////////////////////////////
-
-    layer_System {
-      display-name = "System";
-      bindings = <
-        // Row 0
-        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_pinky_tap KEY_RH_C1R2  &right_pinky_tap KEY_RH_C2R2  &right_pinky_tap KEY_RH_C3R2  &right_pinky_tap KEY_RH_C4R2  &right_pinky_tap KEY_RH_C5R2  &right_pinky_tap KEY_RH_C6R2
         // Row 1
-        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
-        // Row 2: RGB controls
-        &none  &rgb_ug RGB_SPI  &rgb_ug RGB_SAI  &rgb_ug RGB_HUI  &rgb_ug RGB_BRI  &rgb_ug RGB_EFF  &none    &none  &none    &none  &none    &none  &rgb_ug RGB_EFF  &rgb_ug RGB_BRI  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_SPI  &none
-        // Row 3: RGB controls (reverse)
-        &none  &rgb_ug RGB_SPD  &rgb_ug RGB_SAD  &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFR    &none                                     &none    &rgb_ug RGB_EFR  &rgb_ug RGB_BRD  &rgb_ug RGB_HUD  &rgb_ug RGB_SAD  &rgb_ug RGB_SPD  &none
-        // Row 4: system keys
-        &none  &none  &kp K_APP  &kp PSCRN  &kp PAUSE_BREAK    &rgb_ug RGB_TOG  &kp _LOCK  &kp _SLEEP    &kp _POWER  &linux_magic_sysrq  &tog LAYER_System    &rgb_ug RGB_TOG  &kp SLCK  &kp KP_NUM  &kp CAPS  &kp _LOCK
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &right_pinky_tap KEY_RH_C1R3  &right_pinky_tap KEY_RH_C2R3  &right_pinky_tap KEY_RH_C3R3  &right_pinky_tap KEY_RH_C4R3  &right_pinky_tap KEY_RH_C5R3  &right_pinky_tap KEY_RH_C6R3
+        // Row 2: home row + palm; pinky = &none
+        &trans  &kp LEFT_PINKY_KEY  &kp LEFT_RINGY_KEY  &kp LEFT_MIDDY_KEY  &kp LEFT_INDEX_KEY  &trans  &trans    &trans  &trans    &right_pinky_tap KEY_RH_T6  &mo LAY_RH_T5    &trans  &right_pinky_tap KEY_RH_C1R4  &RightPinkyIndex  &RightPinkyMiddy  &RightPinkyRingy  &none  &right_pinky_tap KEY_RH_C6R4
+        // Row 3
+        &trans  &trans  &trans  &trans  &trans  &trans    &trans                                   &mo LAY_RH_T4    &right_pinky_tap KEY_RH_C1R5  &right_pinky_tap KEY_RH_C2R5  &right_pinky_tap KEY_RH_C3R5  &right_pinky_tap KEY_RH_C4R5  &right_pinky_tap KEY_RH_C5R5  &trans
+        // Row 4: v52: T2 = &mo LAY_RH_T2
+        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &right_pinky_tap KEY_RH_T3  &mo LAY_RH_T2  &mo LAY_RH_T1    &mo LAY_RH_C2R6  &right_pinky_tap KEY_RH_C3R6  &right_pinky_tap KEY_RH_C4R6  &right_pinky_tap KEY_RH_C5R6  &trans
       >;
     };
 
     //////////////////////////////////////////////////////////////////////////
     //
-    // Layer 18: Mouse
-    //
-    // Mouse movement on both hands, scroll, click buttons.
-    //
-    //////////////////////////////////////////////////////////////////////////
-
-    layer_Mouse {
-      display-name = "Mouse";
-      bindings = <
-        // Row 0
-        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
-        // Row 1
-        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
-        // Row 2: scroll + movement on left; click + scroll on right
-        &none  &none  &msc MOUSE_SCROLL_LEFT  &mmv MOVE_UP  &msc MOUSE_SCROLL_RIGHT  &none  &none    &none  &none    &none  &none    &none  &msc MOUSE_SCROLL_LEFT  &mkp LCLK  &mkp MCLK  &mkp RCLK  &msc MOUSE_SCROLL_RIGHT  &none
-        // Row 3: scroll + movement on left; speed layers + app on right
-        &none  &msc MOUSE_SCROLL_UP  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc MOUSE_SCROLL_UP    &none                                     &none    &msc MOUSE_SCROLL_UP  &mo LAYER_MouseFast  &mo LAYER_MouseSlow  &mo LAYER_MouseWarp  &kp K_APP  &mkp MB4
-        // Row 4: scroll + clipboard on left; movement + speed on right
-        &none  &msc MOUSE_SCROLL_DOWN  &kp _CUT  &kp _COPY  &kp _PASTE    &msc MOUSE_SCROLL_DOWN  &mkp MCLK  &kp K_APP    &mkp MB5  &kp _CUT  &kp _COPY    &kp _PASTE  &msc MOUSE_SCROLL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_UP  &mmv MOVE_DOWN
-      >;
-    };
-
-    //////////////////////////////////////////////////////////////////////////
-    //
-    // Layer 19: MouseSlow (transparent speed override)
-    //
-    //////////////////////////////////////////////////////////////////////////
-
-    layer_MouseSlow {
-      display-name = "MsSlow";
-      bindings = <
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans  &trans    &trans                                   &trans    &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-      >;
-    };
-
-    //////////////////////////////////////////////////////////////////////////
-    //
-    // Layer 20: MouseFast (transparent speed override)
-    //
-    //////////////////////////////////////////////////////////////////////////
-
-    layer_MouseFast {
-      display-name = "MsFast";
-      bindings = <
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans  &trans    &trans                                   &trans    &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-      >;
-    };
-
-    //////////////////////////////////////////////////////////////////////////
-    //
-    // Layer 21: MouseWarp (transparent speed override)
-    //
-    //////////////////////////////////////////////////////////////////////////
-
-    layer_MouseWarp {
-      display-name = "MsWarp";
-      bindings = <
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans  &trans    &trans                                   &trans    &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-      >;
-    };
-
-    //////////////////////////////////////////////////////////////////////////
-    //
-    // Layer 22: Gaming
-    //
-    // Gaming layout with WASD-centric left hand, standard right hand.
+    // Layer 11: Gaming (v52: moved from 22 to 11)
     //
     //////////////////////////////////////////////////////////////////////////
 
@@ -594,55 +351,77 @@
 
     //////////////////////////////////////////////////////////////////////////
     //
-    // Layer 23: Factory
+    // Layer 12: Cursor
     //
-    // Standard QWERTY factory-default-style layout for recovery.
+    // v52: content shifted up one row; new Row 6 content on bottom.
     //
     //////////////////////////////////////////////////////////////////////////
 
-    layer_Factory {
-      display-name = "Factory";
+    layer_Cursor {
+      display-name = "Cursor";
       bindings = <
-        // Row 0
-        &kp EQUAL  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &none                                            &none  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp MINUS
-        // Row 1
-        &kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T  &none                                                   &none  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp BSLH
-        // Row 2
-        &kp ESC  &kp A  &kp S  &kp D  &kp F  &kp G  &none    &kp LCTRL  &mo LAYER_Lower    &kp LGUI  &kp RCTRL    &none  &kp H  &kp J  &kp K  &kp L  &kp SEMI  &kp SQT
-        // Row 3
-        &kp GRAVE  &kp Z  &kp X  &kp C  &kp V  &kp B    &kp LSHFT                                           &kp RSHFT    &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp PG_UP
-        // Row 4
-        &magic LAYER_Magic 0  &kp HOME  &kp END  &kp LEFT  &kp RIGHT    &kp BSPC  &kp DEL  &kp LALT    &kp RALT  &kp RET  &kp SPACE    &kp UP  &kp DOWN  &kp LBKT  &kp RBKT  &kp PG_DN
+        // Row 0 (from Glove80 Row 2)
+        &none  &kp ESC  &kp INS  &kp LS(TAB)  &kp DEL  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
+        // Row 1 (from Glove80 Row 3)
+        &none  &kp RET  &kp SPACE  &kp TAB  &kp BSPC  &kp _CUT  &none                                                    &none  &kp _CUT  &kp LS(TAB)  &kp _UNDO  &kp _REDO  &kp TAB  &none
+        // Row 2: home row (Glove80 Row 4) + palm (T5=&none, T6=&none | T6=select_none, T5=extend_line)
+        &sk LSHFT  &kp LEFT_PINKY_MOD  &kp LEFT_RINGY_MOD  &kp LEFT_MIDDY_MOD  &kp LEFT_INDEX_MOD  &kp _COPY  &none    &none  &none    &select_none  &extend_line    &none  &kp _COPY  &kp LEFT  &kp UP  &kp DOWN  &kp RIGHT  &sk LSHFT
+        // Row 3: selection (Glove80 Row 5) + middle (T4=&none | T4=extend_word)
+        &kp _C(L)  &select_all  &select_line  &select_word  &kp _FIND  &kp _PASTE    &none                                     &extend_word    &kp _PASTE  &kp _HOME  &kp PG_UP  &kp PG_DN  &kp _END  &kp _C(L)
+        // Row 4: bottom (Glove80 Row 6) + thumb (T1=tog Cursor, T2=&none, T3=&none | T3=select_all, T2=select_line, T1=select_word)
+        &kp _C(K)  &kp _UNDO  &kp _REDO  &kp _FIND_PREV  &kp _FIND_NEXT    &tog LAYER_Cursor  &none  &none    &select_all  &select_line  &select_word    &kp _FIND  &kp _FIND_PREV  &kp _FIND_NEXT  &kp _C(H)  &kp _C(K)
       >;
     };
 
     //////////////////////////////////////////////////////////////////////////
     //
-    // Layer 24: Lower
+    // Layer 13: Number
     //
-    // Keypad numbers, sticky mods, and layer toggles.
+    // v52: content shifted up; Row 1 hex display (A-E) dropped.
     //
     //////////////////////////////////////////////////////////////////////////
 
-    layer_Lower {
-      display-name = "Lower";
+    layer_Number {
+      display-name = "Number";
       bindings = <
-        // Row 0
-        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
-        // Row 1
-        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
-        // Row 2: KP digits 1-5 on left; KP digits 6-0 on right
-        &none  &kp KP_N1  &kp KP_N2  &kp KP_N3  &kp KP_N4  &kp KP_N5  &none    &none  &none    &none  &none    &none  &kp KP_N6  &kp KP_N7  &kp KP_N8  &kp KP_N9  &kp KP_N0  &none
-        // Row 3: sticky mods on left; KP operators on right
-        &none  &sk LEFT_PINKY_MOD  &sk LEFT_RINGY_MOD  &sk LEFT_MIDDY_MOD  &sk LEFT_INDEX_MOD  &kp KP_MINUS    &tog LAYER_Function                                     &tog LAYER_System    &kp KP_SLASH  &sk RIGHT_INDEX_MOD  &sk RIGHT_MIDDY_MOD  &sk RIGHT_RINGY_MOD  &sk RIGHT_PINKY_MOD  &none
-        // Row 4: KP grouping + layer toggles
-        &none  &kp KP_LPAR  &kp KP_COMMA  &kp KP_DOT  &kp KP_RPAR    &kp KP_PLUS  &none  &kp RALT    &kp RALT  &none  &none    &kp KP_MULTIPLY  &kp KP_NUM  &kp KP_CLEAR  &kp KP_EQUAL  &kp KP_ENTER
+        // Row 0 (from Glove80 Row 2)
+        &none  &kp ESC  &kp INS  &kp LS(TAB)  &kp DEL  &none  &none                                                      &none  &kp LS(BSLH)  &kp LS(N3)  &kp LS(N4)  &kp LS(N6)  &kp LS(GRAVE)  &kp LS(N1)
+        // Row 1 (from Glove80 Row 3)
+        &none  &kp RET  &kp SPACE  &kp TAB  &kp BSPC  &kp N0  &none                                                      &none  &kp LS(G)  &kp N7  &kp N8  &kp N9  &kp LS(SEMI)  &kp LS(N5)
+        // Row 2 (Glove80 Row 4) + palm (T5=&none, T6=&none | T6=LS(COMMA), T5=EQUAL)
+        &sk LSHFT  &kp LEFT_PINKY_MOD  &kp LEFT_RINGY_MOD  &kp LEFT_MIDDY_MOD  &kp LEFT_INDEX_MOD  &kp X  &none    &none  &none    &kp LS(COMMA)  &kp EQUAL    &none  &kp K  &kp N4  &kp N5  &kp N6  &kp MINUS  &kp LS(EQUAL)
+        // Row 3 (Glove80 Row 5) + middle (T4=&none | T4=COMMA)
+        &kp E  &select_all  &select_line  &select_word  &kp _FIND  &kp F    &none                                     &kp COMMA    &kp J  &kp N1  &kp N2  &kp N3  &kp FSLH  &kp LS(N8)
+        // Row 4: bottom (Glove80 Row 6) + thumb (T1=&none, T2=tog Number, T3=&none | T3=LS(DOT), T2=DOT, T1=N0)
+        &kp LS(MINUS)  &kp _UNDO  &kp _REDO  &kp _FIND_PREV  &kp _FIND_NEXT    &none  &tog LAYER_Number  &none    &kp LS(DOT)  &kp DOT  &kp N0    &kp LS(N9)  &kp LBKT  &kp RBKT  &kp LS(N0)  &kp LS(N2)
       >;
     };
 
     //////////////////////////////////////////////////////////////////////////
     //
-    // Layer 25: macOS_left (conditional: macOS + left-hand layers)
+    // Layer 14: Function
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+    layer_Function {
+      display-name = "Fn";
+      bindings = <
+        // Row 0 (from Glove80 Row 2)
+        &none  &kp ESC  &kp INS  &kp LS(TAB)  &kp DEL  &none  &none                                                      &none  &kp C_MEDIA_HOME  &kp C_PLAY  &kp C_PREV  &kp C_NEXT  &kp C_STOP  &kp C_EJECT
+        // Row 1 (from Glove80 Row 3)
+        &none  &kp RET  &kp SPACE  &kp TAB  &kp BSPC  &kp K_CALC  &none                                                  &none  &kp K_CALC  &kp F7  &kp F8  &kp F9  &kp F10  &kp F13
+        // Row 2 (Glove80 Row 4) + palm (T5=&none, T6=&none | T6=C_PREV, T5=C_PP)
+        &sk LSHFT  &kp LEFT_PINKY_MOD  &kp LEFT_RINGY_MOD  &kp LEFT_MIDDY_MOD  &kp LEFT_INDEX_MOD  &kp K_WWW  &none    &none  &none    &kp C_PREV  &kp C_PP    &none  &kp K_WWW  &kp F4  &kp F5  &kp F6  &kp F11  &kp F14
+        // Row 3 (Glove80 Row 5) + middle (T4=tog Function | T4=C_MUTE)
+        &none  &select_all  &select_line  &select_word  &kp _FIND  &kp _FILES    &tog LAYER_Function                       &kp C_MUTE    &kp _FILES  &kp F1  &kp F2  &kp F3  &kp F12  &kp F15
+        // Row 4: bottom (Glove80 Row 6) + thumb (T1=&none, T2=&none, T3=&none | T3=C_NEXT, T2=C_VOL_DN, T1=C_VOL_UP)
+        &none  &kp _UNDO  &kp _REDO  &kp _FIND_PREV  &kp _FIND_NEXT    &none  &none  &none    &kp C_NEXT  &kp C_VOL_DN  &kp C_VOL_UP    &kp C_BRI_MAX  &kp C_BRI_UP  &kp C_BRI_DN  &kp C_BRI_MIN  &kp C_BRI_AUTO
+      >;
+    };
+
+    //////////////////////////////////////////////////////////////////////////
+    //
+    // Layer 15: macOS_left (v52: moved from 25 to 15)
     //
     // Overrides left-hand sticky mods for macOS modifier order.
     //
@@ -666,7 +445,78 @@
 
     //////////////////////////////////////////////////////////////////////////
     //
-    // Layer 26: macOS_right (conditional: macOS + right-hand layers)
+    // Layer 16: Symbol
+    //
+    // v52: content shifted up; new Row 6 content on bottom.
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+    layer_Symbol {
+      display-name = "Symbol";
+      bindings = <
+        // Row 0 (from Glove80 Row 2)
+        &none  &kp GRAVE  &kp LS(N9)  &kp LS(N0)  &kp SEMI  &kp COMMA  &none                    &none  &none  &none  &none  &none  &none  &none
+        // Row 1 (from Glove80 Row 3)
+        &kp LS(N1)  &kp LBKT  &kp LS(LBKT)  &kp LS(RBKT)  &kp RBKT  &kp LS(FSLH)  &none        &none  &kp DOT  &kp DEL  &kp LS(TAB)  &kp INS  &kp ESC  &none
+        // Row 2 (Glove80 Row 4) + palm (T5=DOT, T6=LS(N8) | T6=&none, T5=&none)
+        &kp LS(N3)  &kp LS(N6)  &kp EQUAL  &kp LS(MINUS)  &kp LS(N4)  &kp LS(N8)  &none    &kp DOT  &kp LS(N8)    &none  &none    &none  &kp COMMA  &kp BSPC  &kp TAB  &kp SPACE  &kp RET  &triple_backtick
+        // Row 3 (Glove80 Row 5) + middle (T4=BSLH | T4=&none)
+        &kp LS(GRAVE)  &kp LS(COMMA)  &kp LS(BSLH)  &kp MINUS  &kp LS(DOT)  &kp FSLH    &kp BSLH                       &none    &kp SEMI  &kp LS(SINGLE_QUOTE)  &kp SQT  &kp GRAVE  &kp BSLH  &trans
+        // Row 4: bottom (Glove80 Row 6) + thumb
+        &dot_dot  &kp LS(N7)  &kp SQT  &kp LS(SQT)  &kp LS(EQUAL)    &kp LS(N5)  &kp LS(SEMI)  &kp LS(N2)    &none  &none  &tog LAYER_Symbol    &kp RIGHT_INDEX_MOD  &kp RIGHT_MIDDY_MOD  &kp RIGHT_RINGY_MOD  &kp RIGHT_PINKY_MOD  &none
+      >;
+    };
+
+    //////////////////////////////////////////////////////////////////////////
+    //
+    // Layer 17: Mouse (v52: swapped with System, was 18 now 17)
+    //
+    // v52: speed layer refs renamed to Mouse_slow/fast/warp,
+    //      speed toggle order changed on Row 4/5.
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+    layer_Mouse {
+      display-name = "Mouse";
+      bindings = <
+        // Row 0 (from Glove80 Row 2)
+        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
+        // Row 1 (from Glove80 Row 3): scroll + click
+        &none  &none  &msc MOUSE_SCROLL_LEFT  &mmv MOVE_UP  &msc MOUSE_SCROLL_RIGHT  &none  &none            &none  &msc MOUSE_SCROLL_LEFT  &mkp LCLK  &mkp MCLK  &mkp RCLK  &msc MOUSE_SCROLL_RIGHT  &none
+        // Row 2 (Glove80 Row 4) + palm (T5=K_APP, T6=MB5 | T6=_CUT, T5=_COPY): movement + speed layers
+        &none  &msc MOUSE_SCROLL_UP  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc MOUSE_SCROLL_UP  &none    &kp K_APP  &mkp MB5    &kp _CUT  &kp _COPY    &none  &msc MOUSE_SCROLL_UP  &mo LAYER_Mouse_fast  &mo LAYER_Mouse_warp  &mo LAYER_Mouse_slow  &kp K_APP  &mkp MB4
+        // Row 3 (Glove80 Row 5) + middle (T4=MCLK | T4=_PASTE): speed toggles + movement
+        &none  &msc MOUSE_SCROLL_DOWN  &mo LAYER_Mouse_slow  &mo LAYER_Mouse_warp  &mo LAYER_Mouse_fast  &msc MOUSE_SCROLL_DOWN    &mkp MCLK                                     &kp _PASTE    &msc MOUSE_SCROLL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_UP  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &mkp MB5
+        // Row 4 (Glove80 Row 6) + thumb (T1=LCLK, T2=RCLK, T3=MB4 | T3=&none, T2=tog Mouse, T1=&none): clipboard + mods
+        &none  &none  &kp _CUT  &kp _COPY  &kp _PASTE    &mkp LCLK  &mkp RCLK  &mkp MB4    &none  &tog LAYER_Mouse  &none    &kp RIGHT_INDEX_MOD  &kp RIGHT_MIDDY_MOD  &kp RIGHT_RINGY_MOD  &kp RIGHT_PINKY_MOD  &none
+      >;
+    };
+
+    //////////////////////////////////////////////////////////////////////////
+    //
+    // Layer 18: System (v52: swapped with Mouse, was 17 now 18)
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+    layer_System {
+      display-name = "System";
+      bindings = <
+        // Row 0 (from Glove80 Row 2)
+        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
+        // Row 1 (from Glove80 Row 3): RGB forward controls
+        &none  &rgb_ug RGB_SPI  &rgb_ug RGB_SAI  &rgb_ug RGB_HUI  &rgb_ug RGB_BRI  &rgb_ug RGB_EFF  &none    &none  &rgb_ug RGB_EFF  &rgb_ug RGB_BRI  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_SPI  &none
+        // Row 2 (Glove80 Row 4) + palm (T5=_SLEEP, T6=_POWER | T6=&none, T5=linux_magic_sysrq): RGB reverse
+        &none  &rgb_ug RGB_SPD  &rgb_ug RGB_SAD  &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFR  &none    &kp _SLEEP  &kp _POWER    &none  &linux_magic_sysrq    &none  &rgb_ug RGB_EFR  &rgb_ug RGB_BRD  &rgb_ug RGB_HUD  &rgb_ug RGB_SAD  &rgb_ug RGB_SPD  &none
+        // Row 3 (Glove80 Row 5) + middle (T4=_LOCK | T4=tog System): system keys
+        &none  &none  &kp K_APP  &kp PSCRN  &kp PAUSE_BREAK  &rgb_ug RGB_TOG    &kp _LOCK                                     &tog LAYER_System    &rgb_ug RGB_TOG  &kp SLCK  &kp KP_NUM  &kp CAPS  &kp _LOCK  &kp _SLEEP
+        // Row 4 (Glove80 Row 6) + thumb (T1=SLCK, T2=KP_NUM, T3=CAPS | T3=K_APP, T2=PSCRN, T1=PAUSE_BREAK): sysrq + mods
+        &none  &none  &none  &none  &linux_magic_sysrq    &kp SLCK  &kp KP_NUM  &kp CAPS    &kp K_APP  &kp PSCRN  &kp PAUSE_BREAK    &kp RIGHT_INDEX_MOD  &kp RIGHT_MIDDY_MOD  &kp RIGHT_RINGY_MOD  &kp RIGHT_PINKY_MOD  &kp _POWER
+      >;
+    };
+
+    //////////////////////////////////////////////////////////////////////////
+    //
+    // Layer 19: macOS_right (v52: moved from 26 to 19)
     //
     // Overrides right-hand sticky mods for macOS modifier order.
     //
@@ -690,7 +540,99 @@
 
     //////////////////////////////////////////////////////////////////////////
     //
-    // Layer 27: macOS_lower (conditional: macOS + Lower)
+    // Layer 20: Emoji (v52: moved from 14 to 20)
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+    layer_Emoji {
+      display-name = "Emoji";
+      bindings = <
+        // Row 0
+        &emoji_cloudy  &emoji_mostly_cloudy  &emoji_partly_cloudy  &emoji_mostly_sunny  &emoji_sunny  &none  &none                                     &none  &none  &emoji_new_moon  &emoji_moon_crescent  &emoji_moon_quarter  &emoji_moon_gibbous  &emoji_full_moon
+        // Row 1
+        &emoji_rainbow  &emoji_light_skin_tone  &emoji_medium_light_skin_tone  &emoji_medium_skin_tone  &emoji_medium_dark_skin_tone  &emoji_dark_skin_tone  &none                                     &none  &emoji_theme_party  &emoji_theme_love  &emoji_theme_nature  &emoji_theme_strength  &emoji_theme_effort  &emoji_theme_science
+        // Row 2
+        &emoji_left_arrow  &emoji_bald  &emoji_red_hair  &emoji_curly_hair  &emoji_white_hair  &emoji_right_arrow  &none    &none  &none    &none  &none    &none  &emoji_face_laugh  &emoji_face_smile  &emoji_face_eyes  &emoji_face_joke  &emoji_face_fear  &emoji_face_surprise
+        // Row 3
+        &emoji_male_sign  &emoji_hair_style_preset  &emoji_skin_tone_preset  &emoji_gender_sign_preset  &sk LSHFT  &emoji_female_sign    &none                                     &none    &emoji_gesture_attention  &emoji_gesture_approval  &emoji_gesture_gratitude  &emoji_gesture_anxiety  &emoji_gesture_despair  &emoji_gesture_curious
+        // Row 4
+        &emoji_old_man  &emoji_man  &emoji_boy  &emoji_girl  &emoji_woman    &emoji_old_woman  &emoji_cityscape  &emoji_cityscape_dusk    &emoji_cityscape_night  &emoji_theme_magic  &emoji_theme_space    &emoji_theme_awesome  &emoji_person_tipping_hand  &emoji_person_gesturing_ok  &emoji_person_bowing  &emoji_person_raising_hand
+      >;
+    };
+
+    //////////////////////////////////////////////////////////////////////////
+    //
+    // Layer 21: World (v52: moved from 15 to 21)
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+    layer_World {
+      display-name = "World";
+      bindings = <
+        // Row 0
+        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
+        // Row 1
+        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
+        // Row 2: accented vowels on left; sticky mods on right
+        &none  &none  &world_y_base  &world_o_base  &world_u_base  &world_sign_angle  &none    &none  &none    &none  &none    &none  &none  &none  &sk LALT  &sk RALT  &none  &none
+        // Row 3: consonants + accented vowels on left; sticky mods on right
+        &none  &world_consonants_base  &world_i_base  &world_a_base  &world_e_base  &world_sign_dash    &none                                     &none    &none  &sk LSHFT  &sk LCTRL  &sk RCTRL  &sk RSHFT  &none
+        // Row 4: currency + quotes on left; toggle on right
+        &world_currency_base  &world_quotes_left_base  &world_sign_landmark  &world_sign_ordinal  &world_sign_exclaim    &world_sign_question  &none  &none    &none  &none  &none    &none  &tog LAYER_World  &none  &none  &none
+      >;
+    };
+
+    //////////////////////////////////////////////////////////////////////////
+    //
+    // Layer 22: Factory
+    //
+    // Standard QWERTY factory-default-style layout for recovery.
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+    layer_Factory {
+      display-name = "Factory";
+      bindings = <
+        // Row 0
+        &kp EQUAL  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &none                                            &none  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp MINUS
+        // Row 1
+        &kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T  &none                                                   &none  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp BSLH
+        // Row 2
+        &kp ESC  &kp A  &kp S  &kp D  &kp F  &kp G  &none    &kp LCTRL  &mo LAYER_Lower    &kp LGUI  &kp RCTRL    &none  &kp H  &kp J  &kp K  &kp L  &kp SEMI  &kp SQT
+        // Row 3
+        &kp GRAVE  &kp Z  &kp X  &kp C  &kp V  &kp B    &kp LSHFT                                           &kp RSHFT    &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp PG_UP
+        // Row 4
+        &magic LAYER_Magic 0  &kp HOME  &kp END  &kp LEFT  &kp RIGHT    &kp BSPC  &kp DEL  &kp LALT    &kp RALT  &kp RET  &kp SPACE    &kp UP  &kp DOWN  &kp LBKT  &kp RBKT  &kp PG_DN
+      >;
+    };
+
+    //////////////////////////////////////////////////////////////////////////
+    //
+    // Layer 23: Lower (v52: was 24, now 23)
+    //
+    // Keypad numbers, sticky mods, and layer toggles.
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+    layer_Lower {
+      display-name = "Lower";
+      bindings = <
+        // Row 0
+        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
+        // Row 1
+        &none  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
+        // Row 2: KP digits 1-5 on left; KP digits 6-0 on right
+        &none  &kp KP_N1  &kp KP_N2  &kp KP_N3  &kp KP_N4  &kp KP_N5  &none    &none  &none    &none  &none    &none  &kp KP_N6  &kp KP_N7  &kp KP_N8  &kp KP_N9  &kp KP_N0  &none
+        // Row 3: sticky mods on left; KP operators on right
+        &none  &sk LEFT_PINKY_MOD  &sk LEFT_RINGY_MOD  &sk LEFT_MIDDY_MOD  &sk LEFT_INDEX_MOD  &kp KP_MINUS    &tog LAYER_Function                                     &tog LAYER_System    &kp KP_SLASH  &sk RIGHT_INDEX_MOD  &sk RIGHT_MIDDY_MOD  &sk RIGHT_RINGY_MOD  &sk RIGHT_PINKY_MOD  &none
+        // Row 4: KP grouping + layer toggles
+        &none  &kp KP_LPAR  &kp KP_COMMA  &kp KP_DOT  &kp KP_RPAR    &kp KP_PLUS  &none  &kp RALT    &kp RALT  &none  &none    &kp KP_MULTIPLY  &kp KP_NUM  &kp KP_CLEAR  &kp KP_EQUAL  &kp KP_ENTER
+      >;
+    };
+
+    //////////////////////////////////////////////////////////////////////////
+    //
+    // Layer 24: macOS_lower (v52: was 27, now 24)
     //
     // Overrides sticky mods on both hands for macOS modifier order.
     //
@@ -714,10 +656,60 @@
 
     //////////////////////////////////////////////////////////////////////////
     //
+    // Layer 25: Mouse_slow (v52: renamed from MouseSlow, was 19 now 25)
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+    layer_Mouse_slow {
+      display-name = "MsSlow";
+      bindings = <
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans    &trans                                   &trans    &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+      >;
+    };
+
+    //////////////////////////////////////////////////////////////////////////
+    //
+    // Layer 26: Mouse_fast (v52: renamed from MouseFast, was 20 now 26)
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+    layer_Mouse_fast {
+      display-name = "MsFast";
+      bindings = <
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans    &trans                                   &trans    &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+      >;
+    };
+
+    //////////////////////////////////////////////////////////////////////////
+    //
+    // Layer 27: Mouse_warp (v52: renamed from MouseWarp, was 21 now 27)
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+    layer_Mouse_warp {
+      display-name = "MsWarp";
+      bindings = <
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans  &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans    &trans                                   &trans    &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+      >;
+    };
+
+    //////////////////////////////////////////////////////////////////////////
+    //
     // Layer 28: Magic
     //
-    // Layer switching, Bluetooth profiles, RGB toggle, bootloader, reset.
-    // Enthium/Colemak/Dvorak slots replaced with &none (QWERTY-only).
+    // v52: removed &tog LAYER_Typing from numrow. Uses &to 0 + &tog macOS.
     //
     //////////////////////////////////////////////////////////////////////////
 
@@ -726,8 +718,8 @@
       bindings = <
         // Row 0: BT clear + profiles
         &bt BT_CLR  &none  &none  &none  &none  &none  &none                                                 &none  &none  &none  &none  &none  &none  &bt BT_CLR_ALL
-        // Row 1: base layer select (only QWERTY + macOS/Typing toggles)
-        &to 0  &none  &none  &none  &tog LAYER_macOS  &tog LAYER_Typing  &none                               &none  &none  &none  &none  &none  &none  &none
+        // Row 1: base layer select (QWERTY only, macOS toggle)
+        &to 0  &none  &none  &none  &none  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
         // Row 2: RGB controls
         &none  &rgb_ug RGB_SPI  &rgb_ug RGB_SAI  &rgb_ug RGB_HUI  &rgb_ug RGB_BRI  &rgb_ug RGB_TOG  &none    &none  &none    &none  &none    &none  &none  &none  &none  &none  &none  &none
         // Row 3: RGB reverse + bootloader
