@@ -64,6 +64,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #define OPERATING_SYSTEM 'M'  // macOS: Cmd on middle finger, Ctrl on pinky
+#define DIFFICULTY_LEVEL  5   // expert (100ms tapping resolution)
 #include "keymap.dtsi"
 
 / {
@@ -363,7 +364,7 @@
         // Row 0 (from Glove80 Row 2)
         &none  &kp ESC  &kp INS  &kp LS(TAB)  &kp DEL  &none  &none                                                      &none  &none  &none  &none  &none  &none  &none
         // Row 1 (from Glove80 Row 3)
-        &none  &kp RET  &kp SPACE  &kp TAB  &kp BSPC  &kp _CUT  &none                                                    &none  &kp _CUT  &kp LS(TAB)  &kp _UNDO  &kp _REDO  &kp TAB  &none
+        &none  &kp RET  &kp SPACE  &kp TAB  &kp BSPC  &kp _CUT  &none                                                    &none  &kp _CUT  &kp LS(TAB)  &kp _UNDO  &kp _REDO  &kp TAB  &kp LA(LS(TAB))
         // Row 2: home row (Glove80 Row 4) + palm (T5=&none, T6=&none | T6=select_none, T5=extend_line)
         &sk LSHFT  &kp LEFT_PINKY_MOD  &kp LEFT_RINGY_MOD  &kp LEFT_MIDDY_MOD  &kp LEFT_INDEX_MOD  &kp _COPY  &none    &none  &none    &select_none  &extend_line    &none  &kp _COPY  &kp LEFT  &kp UP  &kp DOWN  &kp RIGHT  &sk LSHFT
         // Row 3: selection (Glove80 Row 5) + middle (T4=&none | T4=extend_word)
