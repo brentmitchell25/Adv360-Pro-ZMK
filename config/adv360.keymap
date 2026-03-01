@@ -88,12 +88,12 @@
         &none  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &tog LAYER_Function                                                            &mo LAYER_Lower  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &none
         // Row 1: QWERTY (Glove80 Row 3) + mod keys
         &kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T  &none                                                                                &none  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp MINUS
-        // Row 2: home row (Glove80 Row 4) + mod + palm (T5=Number DEL, T6=PG_DN | T6=thums_down, T5=Mouse TAB)
-        &kp EQUAL  &LeftPinky (A, LAYER_QWERTY)  &LeftRingy (S, LAYER_QWERTY)  &LeftMiddy (D, LAYER_QWERTY)  &LeftIndex (F, LAYER_QWERTY)  &kp G  &none    &thumb LAYER_Number DELETE  &kp PG_DN    &thums_down  &thumb LAYER_Mouse TAB    &none  &kp H  &RightIndex (J, LAYER_QWERTY)  &RightMiddy (K, LAYER_QWERTY)  &RightRingy (L, LAYER_QWERTY)  &RightPinky (SEMI, LAYER_QWERTY)  &kp SQT
-        // Row 3: lower row (Glove80 Row 5) + middle (T4=Cursor BSPC | T4=Symbol SPACE)
-        &sticky_key_modtap LSFT LSFT  &kp Z  &kp X  &kp C  &kp V  &kp B    &thumb LAYER_Cursor BACKSPACE                                      &space LAYER_Symbol SPACE    &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &sticky_key_modtap RSFT RSFT
-        // Row 4: bottom (Glove80 Row 6) + thumb (T1=Func ESC, T2=Lower, T3=PG_UP | T3=thums_up, T2=Lower INS, T1=System ENTER)
-        &magic LAYER_Magic 0  &kp BSLH  &parang_left  &parang_right  &stumb LAYER_Emoji LSFT    &thumb LAYER_Function ESC  &mo LAYER_Lower  &kp PG_UP    &thums_up  &thumb LAYER_Lower INSERT  &thumb LAYER_System ENTER    &stumb LAYER_World RSFT  &kp LBKT  &kp RBKT  &kp GRAVE  &magic LAYER_Magic 0
+        // Row 2: home row (Glove80 Row 4) + mod + palm (T5=Function ESC, T6=Lower | T6=Lower INS, T5=System TAB)
+        &kp EQUAL  &LeftPinky (A, LAYER_QWERTY)  &LeftRingy (S, LAYER_QWERTY)  &LeftMiddy (D, LAYER_QWERTY)  &LeftIndex (F, LAYER_QWERTY)  &kp G  &none    &thumb LAYER_Function ESC  &mo LAYER_Lower    &thumb LAYER_Lower INSERT  &thumb LAYER_System TAB    &none  &kp H  &RightIndex (J, LAYER_QWERTY)  &RightMiddy (K, LAYER_QWERTY)  &RightRingy (L, LAYER_QWERTY)  &RightPinky (SEMI, LAYER_QWERTY)  &kp SQT
+        // Row 3: lower row (Glove80 Row 5) + middle (T4=PG_UP | T4=thums_up)
+        &sticky_key_modtap LSFT LSFT  &kp Z  &kp X  &kp C  &kp V  &kp B    &kp PG_UP                                      &thums_up    &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &sticky_key_modtap RSFT RSFT
+        // Row 4: bottom (Glove80 Row 6) + thumb (T1=Cursor BSPC, T2=Number LEFT, T3=PG_DN | T3=thums_down, T2=Mouse ENTER, T1=Symbol SPACE)
+        &magic LAYER_Magic 0  &kp BSLH  &parang_left  &parang_right  &stumb LAYER_Emoji LSFT    &thumb LAYER_Cursor BACKSPACE  &thumb LAYER_Number LEFT  &kp PG_DN    &thums_down  &thumb LAYER_Mouse ENTER  &thumb LAYER_Symbol SPACE    &stumb LAYER_World RSFT  &kp LBKT  &kp RBKT  &kp GRAVE  &magic LAYER_Magic 0
       >;
     };
 
