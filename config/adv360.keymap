@@ -59,6 +59,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+#define OPERATING_SYSTEM 'M'  // macOS: Cmd on middle finger, Ctrl on pinky
 #include "keymap.dtsi"
 
 / {
@@ -88,9 +89,9 @@
         // Row 2: home row (Glove80 Row 4: EQUAL, HRM_A..G | H..HRM_SEMI, SQT) + mod + palm
         &kp EQUAL  &LeftPinky (A, LAYER_QWERTY)  &LeftRingy (S, LAYER_QWERTY)  &LeftMiddy (D, LAYER_QWERTY)  &LeftIndex (F, LAYER_QWERTY)  &kp G  &none    &thumb LAYER_Number DELETE  &mo LAYER_Lower    &thumb LAYER_Lower INSERT  &thumb LAYER_Mouse TAB    &none  &kp H  &RightIndex (J, LAYER_QWERTY)  &RightMiddy (K, LAYER_QWERTY)  &RightRingy (L, LAYER_QWERTY)  &RightPinky (SEMI, LAYER_QWERTY)  &kp SQT
         // Row 3: lower (Glove80 Row 5: sticky_shift, Z X C V B | N M , . /, sticky_shift) + middle
-        &sticky_key_modtap LSFT LSFT  &kp Z  &kp X  &kp C  &kp V  &kp B    &thumb LAYER_Cursor BACKSPACE                               &space LAYER_Symbol SPACE    &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &sticky_key_modtap RSFT RSFT
+        &sticky_key_modtap LSFT LSFT  &kp Z  &kp X  &kp C  &kp V  &kp B    &thumb LAYER_Cursor ESC                                      &thumb LAYER_Cursor _END    &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &sticky_key_modtap RSFT RSFT
         // Row 4: bottom (Glove80 Row 6: magic, GRAVE, LBKT, RBKT, Emoji_BSLH | World_PGUP, scroll_up, scroll_dn, PGDN, magic) + thumb
-        &magic LAYER_Magic 0  &kp GRAVE  &kp LBKT  &kp RBKT  &thumb LAYER_Emoji BSLH    &thumb LAYER_Function ESC  &parang_left  &parang_right    &kp _HOME  &kp _END  &thumb LAYER_System ENTER    &thumb LAYER_World PAGE_UP  &msc MOUSE_SCROLL_UP  &msc MOUSE_SCROLL_DOWN  &kp PG_DN  &magic LAYER_Magic 0
+        &magic LAYER_Magic 0  &kp GRAVE  &kp LBKT  &kp RBKT  &thumb LAYER_Emoji BSLH    &thumb LAYER_Function BACKSPACE  &parang_left  &parang_right    &kp _HOME  &kp ENTER  &thumb LAYER_System SPACE    &thumb LAYER_World PAGE_UP  &msc MOUSE_SCROLL_UP  &msc MOUSE_SCROLL_DOWN  &kp PG_DN  &magic LAYER_Magic 0
       >;
     };
 
