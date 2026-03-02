@@ -388,7 +388,7 @@
         // Row 0 (from Glove80 Row 2)
         &none  &kp ESC  &kp INS  &kp LS(TAB)  &kp DEL  &none  &none                                                      &none  &kp LS(BSLH)  &kp LS(N3)  &kp LS(N4)  &kp LS(N6)  &kp LS(GRAVE)  &kp LS(N1)
         // Row 1 (from Glove80 Row 3)
-        &none  &kp RET  &kp SPACE  &kp TAB  &kp BSPC  &kp N0  &none                                                      &none  &kp LS(G)  &kp N7  &kp N8  &kp N9  &kp LS(SEMI)  &kp LS(N5)
+        &kp V  &kp RET  &kp SPACE  &kp TAB  &kp BSPC  &kp N0  &none                                                      &none  &kp LS(G)  &kp N7  &kp N8  &kp N9  &kp LS(SEMI)  &kp LS(N5)
         // Row 2 (Glove80 Row 4) + palm (T5=&none, T6=&none | T6=LS(COMMA), T5=EQUAL)
         &sk LSHFT  &kp LEFT_PINKY_MOD  &kp LEFT_RINGY_MOD  &kp LEFT_MIDDY_MOD  &kp LEFT_INDEX_MOD  &kp X  &none    &none  &none    &kp LS(COMMA)  &kp EQUAL    &none  &kp K  &kp N4  &kp N5  &kp N6  &kp MINUS  &kp LS(EQUAL)
         // Row 3 (Glove80 Row 5) + middle (T4=&none | T4=COMMA)
