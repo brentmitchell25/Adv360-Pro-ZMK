@@ -20,7 +20,7 @@
   #define DIFFICULTY_LEVEL  0  // 0:custom, 1:easy -> 5:hard (see below)
 #endif
 #define ENABLE_MOUSE_KEYS    // requires CONFIG_ZMK_POINTING=y in defconfig
-#define ENFORCE_BILATERAL    // cancels single-handed home row mod+tap
+//#define ENFORCE_BILATERAL  // cancels single-handed home row mod+tap
 //#define SPACE_FORGIVENESS  // allow lingering taps on the space bar
 //#define THUMB_FORGIVENESS  // allow lingering taps on the thumb keys
 //#define SHIFT_FORGIVENESS  // requires v24.08-beta or newer firmware
