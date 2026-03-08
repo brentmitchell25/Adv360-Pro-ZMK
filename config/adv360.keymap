@@ -68,6 +68,36 @@
 #include "keymap.dtsi"
 
 / {
+  macros {
+    // BT profile 0: Mac (resets layers, base is already Mac, no toggle needed)
+    ZMK_MACRO(bt_sel_mac,
+      wait-ms = <100>;
+      tap-ms = <0>;
+      bindings = <&to 0 &bt BT_SEL 0>;
+    )
+    // BT profiles 1-4: Windows (resets layers, toggles macOS to swap Ctrl/Cmd)
+    ZMK_MACRO(bt_sel_win1,
+      wait-ms = <100>;
+      tap-ms = <0>;
+      bindings = <&to 0 &tog LAYER_macOS &bt BT_SEL 1>;
+    )
+    ZMK_MACRO(bt_sel_win2,
+      wait-ms = <100>;
+      tap-ms = <0>;
+      bindings = <&to 0 &tog LAYER_macOS &bt BT_SEL 2>;
+    )
+    ZMK_MACRO(bt_sel_win3,
+      wait-ms = <100>;
+      tap-ms = <0>;
+      bindings = <&to 0 &tog LAYER_macOS &bt BT_SEL 3>;
+    )
+    ZMK_MACRO(bt_sel_win4,
+      wait-ms = <100>;
+      tap-ms = <0>;
+      bindings = <&to 0 &tog LAYER_macOS &bt BT_SEL 4>;
+    )
+  };
+
   keymap {
     compatible = "zmk,keymap";
 
@@ -725,8 +755,8 @@
         &none  &rgb_ug RGB_SPI  &rgb_ug RGB_SAI  &rgb_ug RGB_HUI  &rgb_ug RGB_BRI  &rgb_ug RGB_TOG  &none    &none  &none    &none  &none    &none  &none  &none  &none  &none  &none  &none
         // Row 3: RGB reverse + bootloader
         &bootloader  &rgb_ug RGB_SPD  &rgb_ug RGB_SAD  &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF    &none                                     &none    &none  &none  &none  &none  &none  &bootloader
-        // Row 4: reset + BT profiles (0-4) + USB output + factory
-        &sys_reset  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3    &bt BT_SEL 4  &out OUT_USB  &tog LAYER_Factory    &none  &none  &none    &none  &none  &none  &tog LAYER_macOS  &sys_reset
+        // Row 4: reset + BT profiles (0=Mac, 1-4=Win) + USB output + factory
+        &sys_reset  &bt_sel_mac  &bt_sel_win1  &bt_sel_win2  &bt_sel_win3    &bt_sel_win4  &out OUT_USB  &tog LAYER_Factory    &none  &none  &none    &none  &none  &none  &tog LAYER_macOS  &sys_reset
       >;
     };
 
