@@ -75,26 +75,26 @@
       tap-ms = <0>;
       bindings = <&to 0 &bt BT_SEL 0>;
     )
-    // BT profiles 1-4: Windows (resets layers, toggles macOS to swap Ctrl/Cmd)
+    // BT profiles 1-4: Windows (resets layers, same Ctrl position as Mac)
     ZMK_MACRO(bt_sel_win1,
       wait-ms = <100>;
       tap-ms = <0>;
-      bindings = <&to 0 &tog LAYER_macOS &bt BT_SEL 1>;
+      bindings = <&to 0 &bt BT_SEL 1>;
     )
     ZMK_MACRO(bt_sel_win2,
       wait-ms = <100>;
       tap-ms = <0>;
-      bindings = <&to 0 &tog LAYER_macOS &bt BT_SEL 2>;
+      bindings = <&to 0 &bt BT_SEL 2>;
     )
     ZMK_MACRO(bt_sel_win3,
       wait-ms = <100>;
       tap-ms = <0>;
-      bindings = <&to 0 &tog LAYER_macOS &bt BT_SEL 3>;
+      bindings = <&to 0 &bt BT_SEL 3>;
     )
     ZMK_MACRO(bt_sel_win4,
       wait-ms = <100>;
       tap-ms = <0>;
-      bindings = <&to 0 &tog LAYER_macOS &bt BT_SEL 4>;
+      bindings = <&to 0 &bt BT_SEL 4>;
     )
   };
 
